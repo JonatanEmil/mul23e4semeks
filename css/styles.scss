@@ -18,3 +18,8 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 @import "bootstrapComponents";
 
 // 5. Du kan lave styling her...
+.wide-dropdown {
+	width: 35vw;      /* ca. 576px på en 1920px skærm */
+	columns: 3;       /* del listen i 2 lodrette kolonner */
+	padding: 1rem;
+}
