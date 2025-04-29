@@ -7,11 +7,14 @@ $kategorier = $db->sql('SELECT * FROM kategorier ORDER BY katenavn ASC');
 $lande = $db->sql('SELECT * FROM lande ORDER BY landenavn ASC');
 $butikker = $db->sql('SELECT * FROM butikker ORDER BY butiknavn ASC');
 
-if (!empty($_POST['data'])){
+if (!empty($_POST['data'])) {
     $data = $_POST['data'];
 
     $sqlinsert = "INSERT INTO produkter(prodnavn, prodalt, prodimg, prodpris, prodkasse, prodkassepris, prodbeskriv, prodland, prodomraade) VALUES(:prodnavn, :prodalt, :prodimg, :prodpris, :prodkasse, :prodkassepris, :prodbeskriv, :prodland, :prodomraade)";
     $bind = [":prodalt" => $data["prodalt"], ":prodnavn" => $data["prodnavn"], ":prodimg" => $data["prodimg"], ":prodpris" => $data["prodpris"], ":prodkasse" => $data["prodkasse"], ":prodkassepris" => $data["prodkassepris"], ":prodbeskriv" => $data["prodbeskriv"], ":prodland" => $data["prodland"], ":prodomraade" => $data["prodomraade"]];
+    $db->sql($sqlinsert, $bind, false);
+
+    echo "produkter er nu indsat. <a href='indsaetprodukt.php'>indsæt et prdotukt mere</a>";
 }
 ?>
 <!DOCTYPE html>
@@ -38,6 +41,9 @@ if (!empty($_POST['data'])){
                     <label for="billedefil" class="form-label">Upload billede:</label>
                     <input class="form-control" type="file" id="billedefil" name="data[prodimg]">
                 </div>
+                <div>
+                    <img src="" alt="">
+                </div>
             </div>
             <div class="col-8 row">
                 <div class="mb-3">
@@ -47,18 +53,18 @@ if (!empty($_POST['data'])){
                 <div class="col-4">
                     <div class="dropdown mb-3">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false" data-bs-auto-close="inside">
+                                aria-expanded="false" data-bs-auto-close="false">
                             Vælg kategori(er):
-                        </button>
-                        <ul class="dropdown-menu wide-dropdown">
+                        <select class="form-select dropdown-menu wide-dropdown" multiple aria-label="Multiple select example">
                             <?php foreach ($kategorier as $kategori) { ?>
-                                <li><a class="dropdown-item" href="#"><?php echo $kategori->katenavn ?></a></li>
+                                <option value="<?php echo $kategori->kateid ?>"><?php echo $kategori->katenavn ?></option>
                             <?php } ?>
-                        </ul>
+                        </select>
+                        </button>
                     </div>
                     <div class="dropdown mb-3">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false" data-bs-auto-close="inside" name="data[prodland]">
+                                aria-expanded="false" data-bs-auto-close="false" name="data[prodland]">
                             Vælg land:
                         </button>
                         <ul class="dropdown-menu wide-dropdown">
@@ -69,24 +75,26 @@ if (!empty($_POST['data'])){
                     </div>
                     <div class="mb-3">
                         <label for="omraade" class="form-label">Område:</label>
-                        <input type="text" class="form-control" id="omraade" placeholder="eksempel: Champagne" name="data[proomraade]">
+                        <input type="text" class="form-control" id="omraade" placeholder="eksempel: Champagne"
+                               name="data[proomraade]">
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="dropdown mb-3">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false" data-bs-auto-close="inside" name="data[prodalt]">
+                                aria-expanded="false" data-bs-auto-close="false" name="data[prodalt]">
                             Vælg butik(ker):
-                        </button>
-                        <ul class="dropdown-menu">
+                        <select class="form-select dropdown-menu" multiple aria-label="Multiple select example">
                             <?php foreach ($butikker as $butik) { ?>
-                                <li><a class="dropdown-item" href="#"><?php echo $butik->butiknavn ?></a></li>
+                                <option value="<?php echo $butik->butikid ?>"><?php echo $butik->butiknavn ?></option>
                             <?php } ?>
-                        </ul>
+                        </select>
+                        </button>
                     </div>
                     <div class="mb-3">
                         <label for="pris" class="form-label">Pris inkl. moms (seperer med ,):</label>
-                        <input type="text" class="form-control" id="pris" placeholder="eksempel: 99,95" name="data[prodpris]">
+                        <input type="number" step="0.01" class="form-control" id="pris" placeholder="eksempel: 99,95"
+                               name="data[prodpris]">
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -94,14 +102,15 @@ if (!empty($_POST['data'])){
                         </div>
                         <div class="col-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="kassecheck" >
+                                <input class="form-check-input" type="checkbox" value="" id="kassecheck">
                                 <label class="form-check-label" for="kassecheck" name="data[prodkasse]">
                                 </label>
                             </div>
                         </div>
                         <div class="col-10">
                             <label for="kassepris" class="form-label"></label>
-                            <input type="text" class="form-control" id="kassepris" disabled placeholder="eksempel: 295" name="data[prodkassepris]">
+                            <input type="number" step="0.01" class="form-control" id="kassepris" disabled placeholder="eksempel: 295"
+                                   name="data[prodkassepris]">
                         </div>
                     </div>
                 </div>
@@ -116,6 +125,11 @@ if (!empty($_POST['data'])){
                     <label for="soegeord" class="form-label">Tags (SEO) (seperer med ,):</label>
                     <input type="text" class="form-control" id="soegeord"
                            placeholder="eksempel: rødvin, rød, vin, slagelse, vinkompagnierne, slagese vinkompagni">
+                </div>
+                <div class="d-flex justify-content-between gap-3">
+                    <input class="btn btn-primary me-5" type="reset" value="Glem oprettelse">
+                    <input class="btn btn-primary ms-5" type="button" value="Gem en pdf/udskriv">
+                    <input class="btn btn-primary ms-0" type="submit" value="Gem og afslut">
                 </div>
             </div>
         </div>
