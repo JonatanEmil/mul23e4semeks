@@ -75,9 +75,9 @@ class db {
                 throw new Exception("PDO prepare error");
             }
         }catch (Exception $e){
-	        if (CONFIG_LIVE == 0) {
+            if (CONFIG_LIVE == 0) {
                 die($e->getMessage());
-	        }
+            }
             exit;
         }
     }
@@ -139,6 +139,10 @@ class db {
             return $dbResult;
         }
 
+    }
+
+    public function insertId() {
+        return $this->dbcon->lastInsertId();
     }
 
 }

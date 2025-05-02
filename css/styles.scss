@@ -10,7 +10,12 @@ $link-decoration: none;
 
 // 4. Include any default map overrides here
 $custom-colors: (
-	"farve": $cyan-400,
+				"champagne": #ECE8DF,
+				"cream": #E1D5C9,
+				"rose": #AB958A,
+				"ale": #62554D,
+				"port": #333333,
+				"wine": #642A38,
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
@@ -18,8 +23,17 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 @import "bootstrapComponents";
 
 // 5. Du kan lave styling her...
-.wide-dropdown {
-	width: 35vw;      /* ca. 576px på en 1920px skærm */
-	columns: 3;       /* del listen i 2 lodrette kolonner */
-	padding: 1rem;
+
+.logo{
+	height: 5vh;
+}
+.page-content{
+	margin-top: 6vh;
+	//font
+}
+
+@media only screen and (min-width: 768px) {
+	//.logo{
+	//	height: 5vh;
+	//}
 }

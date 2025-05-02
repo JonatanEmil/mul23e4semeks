@@ -22,6 +22,7 @@ require "settings/init.php";
 </head>
 
 <body>
+<?php include "header.php"; ?>
 <div class="container">
     <div class="row g-3">
         <?php

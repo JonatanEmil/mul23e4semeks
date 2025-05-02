@@ -38,8 +38,9 @@ if (!empty($_POST['data'])) {
         ":prodland" => $data["prodland"],
         ":prodomraade" => $data["prodomraade"]
     ];
-    $result = $db->sql($sqlinsert, $bind, false);
-    $productId = $result->lastInsertId();
+
+    $db->sql($sqlinsert, $bind, false);
+    $productId = $db->InsertId();
     //$db->sql($sqlinsert, $bind, false);
     //$productId = $db->lastInsertId();
 
@@ -187,7 +188,7 @@ if (!empty($_POST['data'])) {
                 <div class="col-4">
                     <div>
                         Vælg kategori(er):
-                        <select id="kategoriSelect" name="kategorier[]" multiple class="form-select" size="11" aria-label="Default select example">
+                        <select id="kategoriSelect" name="kategorier[]" multiple class="form-select" size="11" aria-label="Default select example" >
                             <?php foreach ($kategorier as $kategori) { ?>
                                 <option value="<?php echo $kategori->kateid ?>"><?php echo $kategori->katenavn ?></option>
                             <?php } ?>
