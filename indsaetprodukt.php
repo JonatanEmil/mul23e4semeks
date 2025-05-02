@@ -40,20 +40,22 @@ if (!empty($_POST['data'])) {
     ];
     $result = $db->sql($sqlinsert, $bind, false);
     $productId = $result->lastInsertId();
+    //$db->sql($sqlinsert, $bind, false);
+    //$productId = $db->lastInsertId();
 
 
     $valgtkategorier = $_POST["kategorier"];
 
-   if(!empty($valgtkategorier)) {
+    if (!empty($valgtkategorier)) {
         foreach ($valgtkategorier as $kategori) {
             $prodkateinsert = "INSERT INTO prod-kat-con(prkacoprodid, prkacokatid) VALUES(:prkacoprodid, :prkacokatid)";
             $bind = ["prkacoprodid" => $productId, "prkacokatid" => $kategori];
             $db->sql($prodkateinsert, $bind, false);
-    }
+        }
     }
     $valgtbutikker = $_POST["butikker"];
 
-    if(!empty($valgtbutikker)) {
+    if (!empty($valgtbutikker)) {
         foreach ($valgtbutikker as $butik) {
             $prodbutikinsert = "INSERT INTO prod-but-con(prbucoprodid, prbucobutikid) VALUES(:prbucoprodid, :prbucobutikid)";
             $bind = ["prbucoprodid" => $productId, "prbucobutikid" => $butik];
@@ -62,7 +64,7 @@ if (!empty($_POST['data'])) {
     }
     $valgtikoner = $_POST["ikoner"];
 
-    if(!empty($valgtikoner)) {
+    if (!empty($valgtikoner)) {
         foreach ($valgtikoner as $ikon) {
             $prodikoninsert = "INSERT INTO prod-mad-con(prmacoprodid, prmacoikonid) VALUES(:prmacoprodid, :prmacoikonid)";
             $bind = ["prmacoprodid" => $productId, "prmacoikonid" => $ikon];
@@ -70,16 +72,15 @@ if (!empty($_POST['data'])) {
         }
     }
 
-    $valgtsoegeord = $_POST["ikoner"];
+    $valgtsoegeord = explode(",", $_POST["soegeord"][0]);
 
-    if(!empty($valgsoegeord)) {
-        foreach ($valgsoegeord as $soegeord) {
+    if (!empty($valgtsoegeord)) {
+        foreach ($valgtsoegeord as $soegeord) {
             $prodsoeginsert = "INSERT INTO prod_soeg_con(prodid, soegeordid) VALUES(:prodid, :soegeordid)";
             $bind = ["prodid" => $productId, "soegeordid" => $soegeord];
             $db->sql($prodsoeginsert, $bind, false);
         }
     }
-
 
 
     echo "Produktet er nu indsat.<br>";
@@ -123,78 +124,72 @@ if (!empty($_POST['data'])) {
                     <input type="text" class="form-control" id="produktnavn" name="data[prodnavn]">
                 </div>
                 <div class="col-4">
-                    <div class="dropdown mb-3">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false" data-bs-auto-close="false">
-                            Vælg kategori(er):
-                        <select name="kategorier[]" class="form-select dropdown-menu wide-dropdown katedropdown" multiple aria-label="Multiple select example">
-                            <?php foreach ($kategorier as $kategori) { ?>
-                                <option class="katedropdownitem" value="<?php echo $kategori->kateid ?>"><?php echo $kategori->katenavn ?></option>
+                    <div class="my-2">
+                        <select name="data[prodland]" class="form-select" aria-label="Vælg land">
+                            <option value="" selected disabled>Vælg Land:</option>
+                            <?php foreach ($lande as $land) { ?>
+                                <option value="<?php echo $land->landeid; ?>"><?php echo $land->landenavn; ?></option>
                             <?php } ?>
                         </select>
-                        </button>
-                    </div>
-                    <div class="valgtekateshow">
-
-                    </div>
-                    <div class="dropdown mb-3">
-                        <button class="btn btn-secondary dropdown-toggle landdropdown" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false" data-bs-auto-close="false" name="data[prodland]">
-                            Vælg land:
-                        </button>
-                        <ul class="dropdown-menu wide-dropdown">
-                            <?php foreach ($lande as $land) { ?>
-                                <li><a class="dropdown-item landdropdownmenu"><?php echo $land->landenavn ?> </a></li>
-                            <?php } ?>
-                        </ul>
                     </div>
                     <div class="mb-3">
                         <label for="omraade" class="form-label">Område:</label>
                         <input type="text" class="form-control" id="omraade" placeholder="eksempel: Champagne"
                                name="data[prodomraade]">
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="dropdown mb-3">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false" data-bs-auto-close="false" name="data[prodalt]">
-                            Vælg butik(ker):
-                        <select name="butikker[]" class="form-select dropdown-menu" multiple aria-label="Multiple select example">
+                    <div class="mb-3">
+                        Vælg butik(ker):
+                        <select name="butikker[]" class="form-select" multiple aria-label="Multiple select example">
                             <?php foreach ($butikker as $butik) { ?>
-                                <option value="<?php echo $butik->butikid ?>"><?php echo $butik->butiknavn ?></option>
+                                <option value="<?php echo $butik->butikid ?>"> <?php echo $butik->butiknavn ?></option>
                             <?php } ?>
                         </select>
-                        </button>
                     </div>
+                </div>
+                <div class="col-4">
                     <div class="mb-3">
                         <label for="pris" class="form-label">Pris inkl. moms (seperer med ,):</label>
                         <input type="number" step="0.01" class="form-control" id="pris" placeholder="eksempel: 99,95"
                                name="data[prodpris]">
                     </div>
                     <div class="row">
-                        <div class="col-12">
-                            Kassepris inkl. moms:
+                        <div class="mb-1">
+                            <label class="form-label">Kassepris inkl. moms:</label>
                         </div>
-                        <div class="col-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="kassecheck">
-                                <label class="form-check-label" for="kassecheck" name="data[prodkasse]">
-                                </label>
+
+                        <!-- Ny row med checkbox og input side om side -->
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="form-check h-100 d-flex align-items-center">
+                                    <input class="form-check-input me-2" type="checkbox" value="" id="kassecheck"
+                                           name="data[prodkasse]">
+                                    <label class="form-check-label" for="kassecheck"></label>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <input type="number" step="0.01" class="form-control" id="kassepris" disabled
+                                       placeholder="eksempel: 295"
+                                       name="data[prodkassepris]">
+                                <label class="form-check-label" for="kassepris"></label>
                             </div>
                         </div>
-                        <div class="col-10">
-                            <label for="kassepris" class="form-label"></label>
-                            <input type="number" step="0.01" class="form-control" id="kassepris" disabled placeholder="eksempel: 295"
-                                   name="data[prodkassepris]">
+                        <div>
+                            Vælg ikon(er):
+                            <select name="ikoner[]" class="form-select" multiple aria-label="Multiple select example">
+                                <?php foreach ($ikoner as $ikon) { ?>
+                                    <option value="<?php echo $ikon->ikonid ?>"><img src="img/ikoner/<?php echo $ikon->ikonimg ?>" alt="<?php echo $ikon->ikonnavn ?>"> <?php echo $ikon->ikonnavn ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="col-4">
                     <div>
-                        Vælg ikon(er):
-                        <select name="ikoner[]" class="form-select" multiple aria-label="Multiple select example">
-                            <?php foreach ($ikoner as $ikon) { ?>
-                                <option value="<?php echo $ikon->ikonid ?>"><img src="img/ikoner/<?php echo $ikon->ikonimg ?>" alt="<?php echo $ikon->ikonnavn ?>"> <?php echo $ikon->ikonnavn ?></option>
+                        Vælg kategori(er):
+                        <select id="kategoriSelect" name="kategorier[]" multiple class="form-select" size="11" aria-label="Default select example">
+                            <?php foreach ($kategorier as $kategori) { ?>
+                                <option value="<?php echo $kategori->kateid ?>"><?php echo $kategori->katenavn ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -221,6 +216,18 @@ if (!empty($_POST['data'])) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 
+    document.querySelectorAll("select[multiple]").forEach((selectElement) => {
+        selectElement.addEventListener("mousedown", (event) => {
+            event.preventDefault();
+
+            const clickedOption = event.target;
+
+            if (clickedOption.tagName.toLowerCase() === "option") {
+                clickedOption.selected = !clickedOption.selected;
+            }
+        });
+    });
+
     const fileInput = document.querySelector("#billedefil");
     const previewImg = document.querySelector("#previewImage");
 
@@ -239,16 +246,6 @@ if (!empty($_POST['data'])) {
             previewImg.src = "";
             previewImg.alt = "Intet billede valgt";
         }
-    });
-
-    const valgtlandLinks = document.querySelectorAll(".landdropdownmenu");
-    const landButton = document.querySelector(".landdropdown");
-
-    valgtlandLinks.forEach(link => {
-        link.addEventListener("click", () => {
-            const valgtNavn = link.textContent.trim();
-            landButton.textContent = valgtNavn;
-        });
     });
 
 
