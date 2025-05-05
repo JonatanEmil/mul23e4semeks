@@ -15,7 +15,7 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                 <div class="col-10 d-flex flex-wrap gap-5">
                     <?php foreach ($overkategorier as $overkategori) { ?>
                         <a href="kategori.php?overkateid=<?php echo $overkategori->overkateid ?>"
-                           class="nav-link p-0 fs-4">
+                           class="nav-link p-0 fs-4 ms-2">
                             <?php echo $overkategori->overkatenavn ?>
                         </a>
                     <?php } ?>

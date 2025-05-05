@@ -3,21 +3,7 @@
  * @var db $db
  */
 require "settings/init.php";
-$uploadDir = "img/produkter/";
-$imageName = null;
 
-if (!empty($_FILES['data']['name']['prodimg'])) {
-    $imageName = basename($_FILES['data']['name']['prodimg']);
-    $targetFile = $uploadDir . $imageName;
-
-    // Flyt filen til mappen
-    if (move_uploaded_file($_FILES['data']['tmp_name']['prodimg'], $targetFile)) {
-        // Success
-    } else {
-        echo "Fejl ved upload af billede!";
-        $imageName = null;
-    }
-}
 $kategorier = $db->sql('SELECT * FROM kategorier ORDER BY katenavn ASC');
 $lande = $db->sql('SELECT * FROM lande ORDER BY landenavn ASC');
 $butikker = $db->sql('SELECT * FROM butikker ORDER BY butiknavn ASC');
@@ -26,13 +12,34 @@ $ikoner = $db->sql('SELECT * FROM madikoner ORDER BY ikonnavn ASC');
 if (!empty($_POST['data'])) {
     $data = $_POST['data'];
 
+    $uploadDir = "img/produkter/";
+    $imageName = null;
+    $existingFiles = scandir($uploadDir); // Hent alle filer i mappen
+
+    if (!empty($_FILES['data']['name']['prodimg'])) {
+        // Find det højeste nummer i filerne
+        $fileCount = count($existingFiles) + 1;
+        $fileTmp = $_FILES['data']['tmp_name']['prodimg'];
+        $fileExt = pathinfo($_FILES['data']['name']['prodimg'], PATHINFO_EXTENSION);
+
+        $cleanName = preg_replace("/[^a-zA-Z0-9]/", "_", $data['prodnavn']);
+        $imageName = $cleanName . "_" . $fileCount . "." . $fileExt;
+
+        $targetFile = $uploadDir . $imageName;
+
+        if (!move_uploaded_file($fileTmp, $targetFile)) {
+            echo "Fejl ved upload af billede!";
+            $imageName = null;
+        }
+    }
+
     $sqlinsert = "INSERT INTO produkter(prodnavn, prodalt, prodimg, prodpris, prodkasse, prodkassepris, prodbeskriv, prodland, prodomraade) VALUES(:prodnavn, :prodalt, :prodimg, :prodpris, :prodkasse, :prodkassepris, :prodbeskriv, :prodland, :prodomraade)";
     $bind = [
         ":prodalt" => $data["prodalt"],
         ":prodnavn" => $data["prodnavn"],
         ":prodimg" => $imageName, // her!
         ":prodpris" => $data["prodpris"],
-        ":prodkasse" => $data["prodkasse"],
+        ":prodkasse" => (isset($data["prodkasse"])) ? 1 : 0,
         ":prodkassepris" => $data["prodkassepris"],
         ":prodbeskriv" => $data["prodbeskriv"],
         ":prodland" => $data["prodland"],
@@ -49,8 +56,8 @@ if (!empty($_POST['data'])) {
 
     if (!empty($valgtkategorier)) {
         foreach ($valgtkategorier as $kategori) {
-            $prodkateinsert = "INSERT INTO prod-kat-con(prkacoprodid, prkacokatid) VALUES(:prkacoprodid, :prkacokatid)";
-            $bind = ["prkacoprodid" => $productId, "prkacokatid" => $kategori];
+            $prodkateinsert = "INSERT INTO `prod-kat-con` (prkacoprodid, prkacokatid) VALUES(:prkacoprodid, :prkacokatid)";
+            $bind = [":prkacoprodid" => $productId, ":prkacokatid" => $kategori];
             $db->sql($prodkateinsert, $bind, false);
         }
     }
@@ -58,8 +65,8 @@ if (!empty($_POST['data'])) {
 
     if (!empty($valgtbutikker)) {
         foreach ($valgtbutikker as $butik) {
-            $prodbutikinsert = "INSERT INTO prod-but-con(prbucoprodid, prbucobutikid) VALUES(:prbucoprodid, :prbucobutikid)";
-            $bind = ["prbucoprodid" => $productId, "prbucobutikid" => $butik];
+            $prodbutikinsert = "INSERT INTO `prod-but-con` (prbucoprodid, prbucobutikid) VALUES(:prbucoprodid, :prbucobutikid)";
+            $bind = [":prbucoprodid" => $productId, ":prbucobutikid" => $butik];
             $db->sql($prodbutikinsert, $bind, false);
         }
     }
@@ -67,27 +74,30 @@ if (!empty($_POST['data'])) {
 
     if (!empty($valgtikoner)) {
         foreach ($valgtikoner as $ikon) {
-            $prodikoninsert = "INSERT INTO prod-mad-con(prmacoprodid, prmacoikonid) VALUES(:prmacoprodid, :prmacoikonid)";
-            $bind = ["prmacoprodid" => $productId, "prmacoikonid" => $ikon];
+            $prodikoninsert = "INSERT INTO `prod-mad-con` (prmacoprodid, prmacoikonid) VALUES(:prmacoprodid, :prmacoikonid)";
+            $bind = [":prmacoprodid" => $productId, ":prmacoikonid" => $ikon];
             $db->sql($prodikoninsert, $bind, false);
         }
     }
+    /*
+        $valgtsoegeord = explode(",", $_POST["soegeord"][0;
 
-    $valgtsoegeord = explode(",", $_POST["soegeord"][0]);
+        if (!empty($valgtsoegeord)) {
+            var_dump($valgtsoegeord);
+            foreach ($valgtsoegeord as $soegeord) {
 
-    if (!empty($valgtsoegeord)) {
-        foreach ($valgtsoegeord as $soegeord) {
-            $prodsoeginsert = "INSERT INTO prod_soeg_con(prodid, soegeordid) VALUES(:prodid, :soegeordid)";
-            $bind = ["prodid" => $productId, "soegeordid" => $soegeord];
-            $db->sql($prodsoeginsert, $bind, false);
+            Select soegeord table.
+    check hvis det er i forevejen, ellers så tilføj til databasen
+
+
+                $prodsoeginsert = "INSERT INTO `prod_soeg_con` (prodid, soegeordid) VALUES(:prodid, :soegeordid)";
+                $bind = [":prodid" => $productId, ":soegeordid" => $soegeord];
+                $db->sql($prodsoeginsert, $bind, false);
+            }
         }
-    }
-
+    */
 
     echo "Produktet er nu indsat.<br>";
-    if ($imageName) {
-        echo "<img src='img/$imageName' alt='" . htmlspecialchars($data["prodalt"]);
-    }
     echo "<br><a href='indsaetprodukt.php'>Indsæt et produkt mere</a>";
 }
 ?>
@@ -162,7 +172,7 @@ if (!empty($_POST['data'])) {
                         <div class="row">
                             <div class="col-2">
                                 <div class="form-check h-100 d-flex align-items-center">
-                                    <input class="form-check-input me-2" type="checkbox" value="" id="kassecheck"
+                                    <input class="form-check-input me-2" type="checkbox" value="1" id="kassecheck"
                                            name="data[prodkasse]">
                                     <label class="form-check-label" for="kassecheck"></label>
                                 </div>
@@ -199,11 +209,11 @@ if (!empty($_POST['data'])) {
                     <label for="produktbeskrivelse" class="form-label">Produktbeskrivelse:</label>
                     <textarea class="form-control" id="produktbeskrivelse" rows="5" name="data[prodbeskriv]"></textarea>
                 </div>
-                <div class="mb-3">
+               <!-- <div class="mb-3">
                     <label for="soegeord" class="form-label">Tags (SEO) (seperer med ,):</label>
                     <input type="text" class="form-control" id="soegeord" name="soegeord[]"
                            placeholder="eksempel: rødvin, rød, vin, slagelse, vinkompagnierne, slagese vinkompagni">
-                </div>
+                </div> -->
                 <div class="d-flex justify-content-between gap-3">
                     <input class="btn btn-primary me-5" type="reset" value="Glem oprettelse">
                     <input class="btn btn-primary ms-5" type="button" value="Gem en pdf/udskriv">

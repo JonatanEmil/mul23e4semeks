@@ -142,7 +142,7 @@ class db {
     }
 
     public function insertId() {
-        return $this->dbcon->lastInsertId();
+        return $this->dbCon->lastInsertId();
     }
 
 }
