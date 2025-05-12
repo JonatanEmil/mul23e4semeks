@@ -17,6 +17,7 @@ require "settings/init.php";
     <meta name="copyright" content="Information om copyright">
     
     <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -28,19 +29,50 @@ require "settings/init.php";
         <div class="col-12">
             <h1>Det virker 🥳</h1>
         </div>
-        <div>
-            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DJBFWu_AkD8/" data-instgrm-version="14"></blockquote>
-            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DA6h3AzCY53/?img_index=2" data-instgrm-version="14"></blockquote>
-            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DIL71M3Kemz" data-instgrm-version="14"></blockquote>
-            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CikuD-Hr0oO/" data-instgrm-version="14"></blockquote>
-            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C_I7AEuvOh7/" data-instgrm-version="14"></blockquote>
+    </div>
+    <!-- Swiper HTML -->
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DJBFWu_AkD8/" data-instgrm-version="14"></blockquote></div>
+            <div class="swiper-slide"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DA6h3AzCY53/?img_index=2" data-instgrm-version="14"></blockquote></div>
+            <div class="swiper-slide"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DIL71M3Kemz" data-instgrm-version="14"></blockquote></div>
+            <div class="swiper-slide"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CikuD-Hr0oO/" data-instgrm-version="14"></blockquote></div>
+            <div class="swiper-slide"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C_I7AEuvOh7/" data-instgrm-version="14"></blockquote></div>
         </div>
+        <!-- Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
 </div>
 
-
+<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DJBFWu_AkD8/" data-instgrm-version="14"></blockquote>
+<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DA6h3AzCY53/?img_index=2" data-instgrm-version="14"></blockquote>
+<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DIL71M3Kemz" data-instgrm-version="14"></blockquote>
+<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CikuD-Hr0oO/" data-instgrm-version="14"></blockquote>
+<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C_I7AEuvOh7/" data-instgrm-version="14"></blockquote>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- Denne lå i index
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> denne lå i products, hvilken skal vi bruge?????+-->
 <script src="//www.instagram.com/embed.js"></script>
+<script>
+    const swiper = new Swiper('.swiper', {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        loop: true,
+        slidesPerView: 'auto',
+        coverflowEffect: {
+            //rotate: 50,
+            stretch: 0,
+           // depth: 200,
+            modifier: 1,
+            //slideShadows: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
 </body>
 </html>

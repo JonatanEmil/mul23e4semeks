@@ -86,7 +86,7 @@ if (!empty($_POST['data'])) {
             var_dump($valgtsoegeord);
             foreach ($valgtsoegeord as $soegeord) {
 
-            Select soegeord table.
+            Select soegeord table (ude for denne da vi så kan kalde på det til søgefunktion)
     check hvis det er i forevejen, ellers så tilføj til databasen
 
 
