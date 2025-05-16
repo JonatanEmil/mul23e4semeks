@@ -13,6 +13,12 @@ if (!empty($_GET['kateid']) && !empty($_GET['prodid'])) {
 $produkter = $db->sql('SELECT * FROM produkter INNER JOIN lande ON prodland = landeid INNER JOIN `prod-kat-con` ON prodid = prkacoprodid WHERE prkacokatid = :kateid AND prodid = :prodid', $bind);
 $produkt = $produkter[0];
 $madikoner = $db->sql('SELECT * FROM `prod-mad-con` INNER JOIN madikoner ON prmacoikonid = ikonid WHERE prmacoprodid = :prodid', [":prodid" => $produkt->prodid]);
+$allebutikker = $db->sql('SELECT * FROM butikker');
+$prodbutikker = $db->sql('SELECT * FROM `prod-but-con` INNER JOIN butikker ON prbucobutikid = butikid WHERE prbucoprodid = :prodid', [":prodid" => $produkt->prodid]);
+$prodbutikarr = [];
+foreach ($prodbutikker as $prodbutik) {
+    $prodbutikarr[] = $prodbutik->butikid; // OBS: bruger butikid her
+}
 ?>
 <!DOCTYPE html>
 <html lang="da">
@@ -30,30 +36,48 @@ $madikoner = $db->sql('SELECT * FROM `prod-mad-con` INNER JOIN madikoner ON prma
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body class="bg-champagne">
+<body class="bg-cream">
 <?php include "header.php"; ?>
 <div class="container">
-    <div class="row g-3 page-content">
+    <div class="row g-3 page-content text-port">
         <div class="col-5">
-            <div class="d-flex justify-content-center">
-                <img class="" src="img/produkter/<?php echo $produkt->prodimg; ?>" alt="<?php echo $produkt->prodnavn; ?> - Vinkompagnierne">
+            <div class="d-flex justify-content-center bg-champagne rounded rounded-2">
+                <img class="" src="img/produkter/<?php echo $produkt->prodimg; ?>"
+                     alt="<?php echo $produkt->prodnavn; ?> - Vinkompagnierne">
             </div>
         </div>
         <div class="col-7">
-            <h1 class="mb-0"><?php echo $produkt->prodnavn;?></h1>
-            <p><?php echo $produkt->landenavn;?></p>
-            <?php foreach ($madikoner as $ikon) {?>
-                <img class="img-fluid" style="height: 3vw" src="img/ikoner/<?php echo $ikon->ikonimg?>" alt="<?php echo $ikon->ikonnavn?>">
+            <h1 class="mb-0 "><?php echo $produkt->prodnavn; ?></h1>
+            <p><?php echo $produkt->landenavn; ?></p>
+            <?php foreach ($madikoner as $ikon) { ?>
+                <img class="img-fluid" style="height: 3vw" src="img/ikoner/<?php echo $ikon->ikonimg ?>"
+                     alt="<?php echo $ikon->ikonnavn ?>">
             <?php } ?>
-            <p class="display-2 fw-bold">Kr. <?php echo $produkt->prodpris?> pr. stk.</p>
-            <?php if ($produkt->prodkasse === 1) {?>
-                <p class="h5 fw-bold">Kassepris (6 flasker): Kr. <?php echo $produkt->prodkassepris?> pr. kasse.</p>
-            <?php }?>
-            <select class="form-select" aria-label="Default select example"> <!-- Se kim video vil gerne have den expanded -->
-                <option value="1"></option>
-                <option value="2"></option>
-                <option value="3"></option>
+            <p class="display-2 fw-bold">Kr. <?php echo $produkt->prodpris ?> pr. stk.</p>
+            <?php if ($produkt->prodkasse === 1) { ?>
+                <p class="h5 fw-bold">Kassepris (6 flasker): Kr. <?php echo $produkt->prodkassepris ?> pr. kasse.</p>
+            <?php } ?>
+            <p class="h5">Tilgængelig i disse butikker:</p>
+            <div class="row">
+            <div class="col-2">
+            <select name="butikker" class="form-select bg-champagne" multiple aria-label="butikker" disabled>
+                <?php foreach ($allebutikker as $butik) { ?>
+                    <option class="text-port" value="<?php echo $butik->butikid ?>"
+                        <?php echo in_array($butik->butikid, $prodbutikarr) ? "selected" : ""; ?>>
+                        <?php echo $butik->butiknavn ?>
+                    </option>
+                <?php } ?>
             </select>
+        </div>
+            <div class="col-10">
+                <button class="btn btn-wine">Læg i kurv</button>
+            </div>
+                <div class="col-12">
+                    <br>
+                    <p class="h3">Beskrivelse:</p>
+                    <p class="bg-champagne rounded rounded-2 p-1"><?php echo $produkt->prodbeskriv ?></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
