@@ -4,14 +4,14 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
 
 <header class="fixed-top bg-cream py-1">
     <div class="container text-port">
-        <nav class="row align-items-center">
+        <nav class="row d-flex align-items-center justify-content-center justify-content-xxl-start">
             <!-- Logo -->
-            <div class="col-3 d-flex align-items-center ">
+            <div class="col-3 d-flex align-items-center">
                 <a href="index.php">
                     <img class="img-fluid logo" src="img/logo.webp" alt="Vinkompagniernes logo">
                 </a>
             </div>
-            <div class="col-9 d-flex justify-content-between align-items-center"> <!--d-none d-lg-block-->
+            <div class="col-9 d-flex justify-content-between align-items-center d-none d-xxl-flex"> <!--d-none d-lg-block-->
                 <div class="col-10 d-flex flex-wrap gap-5">
                     <?php foreach ($overkategorier as $overkategori) {
                         $ovkatid = $overkategori->overkateid; ?>
@@ -42,11 +42,10 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                 </div>
             </div>
         </nav>
-
     </div>
 </header>
 
-<!--<footer class="d-lg-none fixed-bottom">
+<footer class="fixed-bottom botnav bg-cream py-1 d-xxl-none">
     <div class="container">
         <nav class="row">
             <div class="col-3"><a href="index.php"> <img class="img-fluid " src="img/logo.webp" alt="Vinkompagniernes logo"></a></div>
@@ -63,4 +62,4 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
             </div>
         </nav>
     </div>
-</footer>-->
+</footer>
