@@ -10,7 +10,7 @@ $bind = [];
 if (!empty($_GET['kateid'])) {
     $bind[":kateid"] = $_GET['kateid'];
 }
-$produkter = $db->sql('SELECT * FROM produkter INNER JOIN lande ON prodland = landeid INNER JOIN `prod-kat-con` ON prodid = prkacoprodid WHERE prkacokatid = :kateid', $bind);
+$produkter = $db->sql('SELECT * FROM produkter LEFT JOIN lande ON prodland = landeid INNER JOIN `prod-kat-con` ON prodid = prkacoprodid WHERE prkacokatid = :kateid', $bind);
 
 ?>
 <!DOCTYPE html>
