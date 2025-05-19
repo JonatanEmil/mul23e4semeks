@@ -52,23 +52,27 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                 3 små ikoner
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <div class="btn-group dropup">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Shop
+                <div class="dropup">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown button
                     </button>
                     <ul class="dropdown-menu">
-                        <?php foreach ($overkategorier as $overkategori) {
-                        $ovkatid = $overkategori->overkateid; ?>
-                        <div class="nav-item dropstart" >
-                            <a class="dropdown-toggle nav-link p-0 fs-5" type="button" data-bs-toggle="dropdown"><?php echo $overkategori->overkatenavn; ?></a>
-                            <div class="dropdown-menu">
+                        <li class="dropstart">
+                            <?php foreach ($overkategorier as $overkategori) {
+                            $ovkatid = $overkategori->overkateid; ?>
+                            <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown"><?php echo $overkategori->overkatenavn; ?></a>
+                            <div class="dropdown-menu" style="min-width: 400px"> <!-- ikke den bedste løsning med fast enhed-->
+                                <div class="row d-flex">
                                 <?php $kategorier = $db->sql('SELECT * FROM kategorier INNER JOIN overkat_underkat_con ON kateid = underkatid WHERE overkatid = :overkatid ', ['overkatid' => $ovkatid]);
                                 foreach ($kategorier as $kategori) { ?>
-                                    <a href="kategori.php?kateid=<?php echo $kategori->kateid; ?>" class="dropdown-item"><?php echo $kategori->katenavn ?></a>
+                                    <div class="col-6"><a href="kategori.php?kateid=<?php echo $kategori->kateid; ?>" class="dropdown-item"><?php echo $kategori->katenavn ?></a></div>
                                 <?php } ?>
                             </div>
-                        </div>
-                        <?php } ?>
+                            </div>
+                            <?php } ?>
+                        </li>
+                        <li><a href="omos.php" class="dropdown-item">OM OS</a></li>
+                        <li><a href="blog.php" class="dropdown-item">BLOG</a></li>
                     </ul>
                 </div>
             </div>
