@@ -25,7 +25,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 // 5. Du kan lave styling her...
 
 .logo{
-	height: 5vh;
+	max-height: 5vh;
 }
 .page-content{
 	margin-top: 6vh;
@@ -50,7 +50,7 @@ select[disabled] {
 	height: auto;         /* tilpasser højde til indhold */
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1440px) {
 	//.logo{
 	//	height: 5vh;
 	//}
