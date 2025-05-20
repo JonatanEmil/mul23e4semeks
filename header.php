@@ -6,7 +6,7 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
     <div class="container text-port">
         <nav class="row d-flex align-items-center justify-content-center justify-content-xxl-start">
             <!-- Logo -->
-            <div class="col-auto d-flex align-items-center">
+            <div class="col-auto col-xxl-3 d-flex align-items-center">
                 <a href="index.php">
                     <img class="img-fluid logo" src="img/logo.webp" alt="Vinkompagniernes logo">
                 </a>
@@ -76,7 +76,6 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                     </ul>
                 </div>
             </div>
-
         </nav>
     </div>
 </footer>
