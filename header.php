@@ -11,29 +11,32 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                     <img class="img-fluid logo pb-2" src="img/logo.webp" alt="Vinkompagniernes logo">
                 </a>
             </div>
-            <div class="col-9 d-flex justify-content-between align-items-center d-none d-xxl-flex"> <!--d-none d-lg-block-->
+            <div class="col-9 d-flex justify-content-between align-items-center d-none d-xxl-flex">
+                <!--d-none d-lg-block-->
                 <div class="col-10 d-flex flex-wrap gap-5">
                     <?php foreach ($overkategorier as $overkategori) {
                         $ovkatid = $overkategori->overkateid; ?>
-                        <div class="nav-item dropdown" >
+                        <div class="nav-item dropdown">
                             <a class="dropdown-toggle nav-link p-0 fs-5" type="button" data-bs-toggle="dropdown">
                                 <?php echo $overkategori->overkatenavn; ?>
                             </a>
                             <div class="dropdown-menu" style="width: 100vw">
-                                <div class="row d-flex justify-content-around">
-                            <?php $kategorier = $db->sql('SELECT * FROM kategorier INNER JOIN overkat_underkat_con ON kateid = underkatid WHERE overkatid = :overkatid ', ['overkatid' => $ovkatid]);
-                            foreach ($kategorier as $kategori) { ?>
-                                <div class="col-auto">
-                                    <img class="img-fluid" src="img/kategorier/<?php echo $kategori->kateimg?>" alt="<?php echo $kategori->katenavn?>" style="max-height: 30px">
-                                <a href="kategori.php?kateid=<?php echo $kategori->kateid; ?>" class="dropdown-item"><?php echo $kategori->katenavn ?></a>
+                                <div class="row d-flex justify-content-center">
+                                    <?php $kategorier = $db->sql('SELECT * FROM kategorier INNER JOIN overkat_underkat_con ON kateid = underkatid WHERE overkatid = :overkatid ', ['overkatid' => $ovkatid]);
+                                    foreach ($kategorier as $kategori) { ?>
+                                        <div class="col-auto d-flex flex-column justify-content-center">
+                                            <img class="img-fluid" src="img/kategorier/<?php echo $kategori->kateimg ?>"
+                                                 alt="<?php echo $kategori->katenavn ?>" style="max-height: 50px">
+                                            <a href="kategori.php?kateid=<?php echo $kategori->kateid; ?>"
+                                               class="dropdown-item"><?php echo $kategori->katenavn ?></a>
+                                        </div>
+                                    <?php } ?>
                                 </div>
-                            <?php } ?>
-                            </div>
                             </div>
                         </div>
                     <?php } ?>
                     <div class="nav-item dropdown">
-                    <a class="dropdown-toggle nav-link p-0 fs-5" type="button" data-bs-toggle="dropdown">Info</a>
+                        <a class="dropdown-toggle nav-link p-0 fs-5" type="button" data-bs-toggle="dropdown">Info</a>
                         <div class="dropdown-menu">
                             <a href="omos.php" class="dropdown-item">Om os</a>
                             <a href="blog.php" class="dropdown-item">Blog</a>
@@ -41,9 +44,12 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                     </div>
                 </div>
                 <div class="col-2 d-flex justify-content-end">
-                    <div class="mx-auto"><img class="img-fluid" src="img/soeg.webp" alt="søgefunktion" style="max-height: 40px"></div>
-                    <div class="mx-auto"><img class="img-fluid" src="img/kurv.webp" alt="kurv med varer" style="max-height: 40px"></div>
-                    <div class="mx-auto"><img class="img-fluid" src="img/bruger.webp" alt="log in eller din brugerprofil" style="max-height: 40px"></div>
+                    <div class="mx-auto"><img class="img-fluid" src="img/soeg.webp" alt="søgefunktion"
+                                              style="max-height: 40px"></div>
+                    <div class="mx-auto"><img class="img-fluid" src="img/kurv.webp" alt="kurv med varer"
+                                              style="max-height: 40px"></div>
+                    <div class="mx-auto"><img class="img-fluid" src="img/bruger.webp"
+                                              alt="log in eller din brugerprofil" style="max-height: 40px"></div>
                 </div>
             </div>
         </nav>
@@ -58,22 +64,28 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
             </div>
             <div class="col-6 d-flex justify-content-end">
                 <div class="dropup">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-auto-close="outside"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                         Dropdown button
                     </button>
                     <ul class="dropdown-menu">
                         <li class="dropstart">
                             <?php foreach ($overkategorier as $overkategori) {
-                            $ovkatid = $overkategori->overkateid; ?>
-                            <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown"><?php echo $overkategori->overkatenavn; ?></a>
-                            <div class="dropdown-menu" style="min-width: 400px"> <!-- ikke den bedste løsning med fast enhed-->
-                                <div class="row d-flex">
-                                <?php $kategorier = $db->sql('SELECT * FROM kategorier INNER JOIN overkat_underkat_con ON kateid = underkatid WHERE overkatid = :overkatid ', ['overkatid' => $ovkatid]);
-                                foreach ($kategorier as $kategori) { ?>
-                                    <div class="col-6"><a href="kategori.php?kateid=<?php echo $kategori->kateid; ?>" class="dropdown-item"><?php echo $kategori->katenavn ?></a></div>
-                                <?php } ?>
-                            </div>
-                            </div>
+                                $ovkatid = $overkategori->overkateid; ?>
+                                <a class="dropdown-item dropdown-toggle"
+                                   data-bs-toggle="dropdown"><?php echo $overkategori->overkatenavn; ?></a>
+                                <div class="dropdown-menu" style="min-width: 400px">
+                                    <!-- ikke den bedste løsning med fast enhed-->
+                                    <div class="row d-flex">
+                                        <?php $kategorier = $db->sql('SELECT * FROM kategorier INNER JOIN overkat_underkat_con ON kateid = underkatid WHERE overkatid = :overkatid ', ['overkatid' => $ovkatid]);
+                                        foreach ($kategorier as $kategori) { ?>
+                                            <div class="col-6"><a
+                                                        href="kategori.php?kateid=<?php echo $kategori->kateid; ?>"
+                                                        class="dropdown-item"><?php echo $kategori->katenavn ?></a>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                </div>
                             <?php } ?>
                         </li>
                         <li><a href="omos.php" class="dropdown-item">OM OS</a></li>
