@@ -39,7 +39,7 @@ foreach ($prodbutikker as $prodbutik) {
 <body class="bg-cream">
 <?php include "header.php"; ?>
 <div class="container bg-rose rounded-3">
-    <div class="row g-3 page-content text-port">
+    <div class="row g-3 page-content text-port align-items-xl-center">
         <h1 class="mb-0 mt-2 fw-bolder d-md-none"><?php echo $produkt->prodnavn; ?></h1>
         <p class="m-0 fs-4 fw-semibold d-md-none"><?php echo $produkt->landenavn; ?></p>
         <p class="display-2 fw-bold d-md-none mb-0">Kr. <?php echo $produkt->prodpris ?> pr. stk.</p>
@@ -47,13 +47,13 @@ foreach ($prodbutikker as $prodbutik) {
             <p class="h5 fw-bold text-wine d-md-none m-0">Kassepris (6 flasker): Kr. <?php echo $produkt->prodkassepris ?> pr. kasse.</p>
         <?php } ?>
         <div class="col-12 d-md-none">
-            <div class="d-flex justify-content-center bg-champagne rounded rounded-2 pt-3 pb-2 me-xl-3 mb-3">
+            <div class="d-flex justify-content-center bg-champagne rounded-2 pt-3 pb-2 me-xl-3 mb-3">
                 <img class="img-fluid product-image-size-small" style="" src="img/produkter/<?php echo $produkt->prodimg; ?>"
                      alt="<?php echo $produkt->prodnavn; ?> - Vinkompagnierne">
             </div>
         </div>
         <div class="col-md-5 d-none d-md-block">
-            <div class="d-flex justify-content-center bg-champagne rounded rounded-2 pt-3 pb-2 me-xl-3 mb-3">
+            <div class="d-flex justify-content-center bg-champagne pt-5 pb-5 rounded-2 pt-3 pb-2 me-xl-3 mb-3">
                 <img class="img-fluid product-image-size-big" src="img/produkter/<?php echo $produkt->prodimg; ?>"
                      alt="<?php echo $produkt->prodnavn; ?> - Vinkompagnierne">
             </div>
@@ -61,7 +61,7 @@ foreach ($prodbutikker as $prodbutik) {
         <div class="col-12 col-md-7">
             <h1 class="mb-0 mt-2 d-none d-md-block"><?php echo $produkt->prodnavn; ?></h1>
             <p class="fs-4 d-none d-md-block"><?php echo $produkt->landenavn; ?></p>
-            <div class="row d-flex justify-content-start justify-content-md-center justify-content-lg-start align-items-center flex-wrap">
+            <div class="row d-flex justify-content-start align-items-center flex-wrap">
                 <?php foreach ($madikoner as $ikon) { ?>
                     <div class="col-auto mt-2 mb-2">
                         <img class="d-none d-md-block" style="max-height: 75px;" src="img/ikoner/<?php echo $ikon->ikonimg ?>"
