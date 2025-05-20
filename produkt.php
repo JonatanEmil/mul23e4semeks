@@ -40,24 +40,42 @@ foreach ($prodbutikker as $prodbutik) {
 <?php include "header.php"; ?>
 <div class="container bg-rose rounded-3">
     <div class="row g-3 page-content text-port">
-        <div class="col-4 col-xl-5">
+        <h1 class="mb-0 mt-2 fw-bolder d-md-none"><?php echo $produkt->prodnavn; ?></h1>
+        <p class="m-0 fs-4 fw-semibold d-md-none"><?php echo $produkt->landenavn; ?></p>
+        <p class="display-2 fw-bold d-md-none mb-0">Kr. <?php echo $produkt->prodpris ?> pr. stk.</p>
+        <?php if ($produkt->prodkasse === 1) { ?>
+            <p class="h5 fw-bold text-wine d-md-none m-0">Kassepris (6 flasker): Kr. <?php echo $produkt->prodkassepris ?> pr. kasse.</p>
+        <?php } ?>
+        <div class="col-12 d-md-none">
             <div class="d-flex justify-content-center bg-champagne rounded rounded-2 pt-3 pb-2 me-xl-3 mb-3">
-                <img class="img-fluid" src="img/produkter/<?php echo $produkt->prodimg; ?>"
+                <img class="img-fluid product-image-size-small" style="" src="img/produkter/<?php echo $produkt->prodimg; ?>"
                      alt="<?php echo $produkt->prodnavn; ?> - Vinkompagnierne">
             </div>
         </div>
-        <div class="col-8 col-xl-7">
-            <h1 class="mb-0 mt-2"><?php echo $produkt->prodnavn; ?></h1>
-            <p class="fs-4"><?php echo $produkt->landenavn; ?></p>
-            <?php foreach ($madikoner as $ikon) { ?>
-                <img style="max-height: 75px;" src="img/ikoner/<?php echo $ikon->ikonimg ?>"
-                     alt="<?php echo $ikon->ikonnavn ?>">
-            <?php } ?>
-            <p class="display-2 fw-bold">Kr. <?php echo $produkt->prodpris ?> pr. stk.</p>
+        <div class="col-md-5 d-none d-md-block">
+            <div class="d-flex justify-content-center bg-champagne rounded rounded-2 pt-3 pb-2 me-xl-3 mb-3">
+                <img class="img-fluid product-image-size-big" src="img/produkter/<?php echo $produkt->prodimg; ?>"
+                     alt="<?php echo $produkt->prodnavn; ?> - Vinkompagnierne">
+            </div>
+        </div>
+        <div class="col-12 col-md-7">
+            <h1 class="mb-0 mt-2 d-none d-md-block"><?php echo $produkt->prodnavn; ?></h1>
+            <p class="fs-4 d-none d-md-block"><?php echo $produkt->landenavn; ?></p>
+            <div class="row d-flex justify-content-start justify-content-md-center justify-content-lg-start align-items-center flex-wrap">
+                <?php foreach ($madikoner as $ikon) { ?>
+                    <div class="col-auto mt-2 mb-2">
+                        <img class="d-none d-md-block" style="max-height: 75px;" src="img/ikoner/<?php echo $ikon->ikonimg ?>"
+                             alt="<?php echo $ikon->ikonnavn ?>">
+                        <img class="d-md-none" style="max-height: 55px;" src="img/ikoner/<?php echo $ikon->ikonimg ?>"
+                             alt="<?php echo $ikon->ikonnavn ?>">
+                    </div>
+                <?php } ?>
+            </div>
+            <p class="display-2 fw-bold d-none d-md-block">Kr. <?php echo $produkt->prodpris ?> pr. stk.</p>
             <?php if ($produkt->prodkasse === 1) { ?>
-                <p class="h5 fw-bold text-wine">Kassepris (6 flasker): Kr. <?php echo $produkt->prodkassepris ?> pr. kasse.</p>
+                <p class="h5 fw-bold text-wine d-none d-md-block">Kassepris (6 flasker): Kr. <?php echo $produkt->prodkassepris ?> pr. kasse.</p>
             <?php } ?>
-            <p class="h5 mt-5 fs-6">Tilgængelig i disse butikker:</p>
+            <p class="h5 mt-3 mt-md-5 fs-6">Tilgængelig i disse butikker:</p>
             <div class="row me-xl-2">
             <div class="col-5 col-xl-3">
                 <select name="butikker" class="form-select bg-champagne" multiple aria-label="butikker" disabled>
