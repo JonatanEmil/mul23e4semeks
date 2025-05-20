@@ -48,13 +48,13 @@ foreach ($prodbutikker as $prodbutik) {
         <?php } ?>
         <div class="col-12 d-md-none">
             <div class="d-flex justify-content-center bg-champagne rounded rounded-2 pt-3 pb-2 me-xl-3 mb-3">
-                <img class="img-fluid" style="" src="img/produkter/<?php echo $produkt->prodimg; ?>"
+                <img class="img-fluid product-image-size-small" style="" src="img/produkter/<?php echo $produkt->prodimg; ?>"
                      alt="<?php echo $produkt->prodnavn; ?> - Vinkompagnierne">
             </div>
         </div>
         <div class="col-md-5 d-none d-md-block">
             <div class="d-flex justify-content-center bg-champagne rounded rounded-2 pt-3 pb-2 me-xl-3 mb-3">
-                <img class="img-fluid" src="img/produkter/<?php echo $produkt->prodimg; ?>"
+                <img class="img-fluid product-image-size-big" src="img/produkter/<?php echo $produkt->prodimg; ?>"
                      alt="<?php echo $produkt->prodnavn; ?> - Vinkompagnierne">
             </div>
         </div>
