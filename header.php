@@ -8,7 +8,7 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
             <!-- Logo -->
             <div class="col-auto col-xxl-3 d-flex align-items-center">
                 <a href="index.php">
-                    <img class="img-fluid logo" src="img/logo.webp" alt="Vinkompagniernes logo">
+                    <img class="img-fluid logo pb-2" src="img/logo.webp" alt="Vinkompagniernes logo">
                 </a>
             </div>
             <div class="col-9 d-flex justify-content-between align-items-center d-none d-xxl-flex"> <!--d-none d-lg-block-->
@@ -19,11 +19,16 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                             <a class="dropdown-toggle nav-link p-0 fs-5" type="button" data-bs-toggle="dropdown">
                                 <?php echo $overkategori->overkatenavn; ?>
                             </a>
-                            <div class="dropdown-menu">
+                            <div class="dropdown-menu" style="width: 100vw">
+                                <div class="row d-flex justify-content-around">
                             <?php $kategorier = $db->sql('SELECT * FROM kategorier INNER JOIN overkat_underkat_con ON kateid = underkatid WHERE overkatid = :overkatid ', ['overkatid' => $ovkatid]);
                             foreach ($kategorier as $kategori) { ?>
+                                <div class="col-auto">
+                                    <img class="img-fluid" src="img/kategorier/<?php echo $kategori->kateimg?>" alt="<?php echo $kategori->katenavn?>" style="max-height: 30px">
                                 <a href="kategori.php?kateid=<?php echo $kategori->kateid; ?>" class="dropdown-item"><?php echo $kategori->katenavn ?></a>
+                                </div>
                             <?php } ?>
+                            </div>
                             </div>
                         </div>
                     <?php } ?>
@@ -35,10 +40,10 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                         </div>
                     </div>
                 </div>
-                <div class="col-2 d-flex flex-wrap justify-content-end">
-                    <div class="mx-auto">🔍</div>
-                    <div class="mx-auto">🛒</div>
-                    <div class="mx-auto">👤</div>
+                <div class="col-2 d-flex justify-content-end">
+                    <div class="mx-auto"><img class="img-fluid" src="img/soeg.webp" alt="søgefunktion" style="max-height: 40px"></div>
+                    <div class="mx-auto"><img class="img-fluid" src="img/kurv.webp" alt="kurv med varer" style="max-height: 40px"></div>
+                    <div class="mx-auto"><img class="img-fluid" src="img/bruger.webp" alt="log in eller din brugerprofil" style="max-height: 40px"></div>
                 </div>
             </div>
         </nav>
