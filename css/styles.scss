@@ -31,19 +31,6 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 	margin-top: 6vh;
 	//font
 }
- .swiper {
-	 padding-top: 50px;
-	 padding-bottom: 50px;
- }
-
-.swiper-slide {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 24px;
-	height: 300px;
-	border-radius: 15px;
-}
 
 select[disabled] {
 	overflow: hidden;     /* skjuler scrollbars */
@@ -62,8 +49,11 @@ select[disabled] {
 	max-height: 925px;
 }
 
+@media only screen and (min-width: 768px) {
+	.mheadside{
+		min-width: 400px;
+	}
+}
+
 @media only screen and (min-width: 1440px) {
-	//.logo{
-	//	height: 5vh;
-	//}
 }

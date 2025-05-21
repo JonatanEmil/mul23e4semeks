@@ -30,19 +30,6 @@ require "settings/init.php";
             <h1>Det virker 🥳</h1>
         </div>
     </div>
-    <!-- Swiper HTML -->
-    <div class="swiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DJBFWu_AkD8/" data-instgrm-version="14"></blockquote></div>
-            <div class="swiper-slide"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DA6h3AzCY53/?img_index=2" data-instgrm-version="14"></blockquote></div>
-            <div class="swiper-slide"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DIL71M3Kemz" data-instgrm-version="14"></blockquote></div>
-            <div class="swiper-slide"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CikuD-Hr0oO/" data-instgrm-version="14"></blockquote></div>
-            <div class="swiper-slide"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C_I7AEuvOh7/" data-instgrm-version="14"></blockquote></div>
-        </div>
-        <!-- Navigation -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
 </div>
 
 <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DJBFWu_AkD8/" data-instgrm-version="14"></blockquote>
@@ -55,24 +42,7 @@ require "settings/init.php";
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> denne lå i products, hvilken skal vi bruge?????+-->
 <script src="//www.instagram.com/embed.js"></script>
 <script>
-    const swiper = new Swiper('.swiper', {
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        loop: true,
-        slidesPerView: 'auto',
-        coverflowEffect: {
-            //rotate: 50,
-            stretch: 0,
-           // depth: 200,
-            modifier: 1,
-            //slideShadows: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
+
 </script>
 </body>
 </html>
