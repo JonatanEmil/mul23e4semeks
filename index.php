@@ -24,8 +24,8 @@ require "settings/init.php";
 
 <body class="bg-champagne">
 <?php include "header.php"; ?>
-<div class="container page-content bg-primary">
-    <div class="row">
+<div class="container page-content bg-cream">
+    <div class="row pt-3">
         <div class="col-12">
             <h1>Det virker 🥳</h1>
         </div>
@@ -42,7 +42,12 @@ require "settings/init.php";
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> denne lå i products, hvilken skal vi bruge?????+-->
 <script src="//www.instagram.com/embed.js"></script>
 <script>
+    const dropupElement = document.querySelector('#searchbutt');
+    const input = document.querySelector('#dropupSearchInput');
 
+    dropupElement.addEventListener('shown.bs.dropdown', function () {
+        input.focus();
+    });
 </script>
 </body>
 </html>

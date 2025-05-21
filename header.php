@@ -2,7 +2,7 @@
 $overkategorier = $db->sql('SELECT * FROM overkategorier');
 ?>
 
-<header class="fixed-top bg-cream py-1">
+<header class="fixed-top py-1 blur bg-opacity-100">
     <div class="container text-port">
         <nav class="row d-flex align-items-center justify-content-center justify-content-xxl-start">
             <!-- Logo -->
@@ -35,48 +35,64 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                         </div>
                     <?php } ?>
                     <div class="nav-item dropdown">
-                        <a class="dropdown-toggle nav-link p-0 fs-5" type="button" data-bs-toggle="dropdown">Info</a>
-                        <div class="dropdown-menu">
-                            <a href="omos.php" class="dropdown-item">Om os</a>
-                            <a href="blog.php" class="dropdown-item">Blog</a>
+                        <a class="dropdown-toggle nav-link p-0 fs-5" type="button" data-bs-toggle="dropdown">INFO</a>
+                        <div class="dropdown-menu bg-champagne">
+                            <a href="omos.php" class="dropdown-item">OM OS</a>
+                            <a href="blog.php" class="dropdown-item">BLOG</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-2 d-flex justify-content-end">
-                    <div class="mx-auto"><img class="img-fluid" src="img/soeg.webp" alt="søgefunktion"
-                                              style="max-height: 40px"></div>
+                    <div id="searchbutt" class="dropstart">
+                        <div class="mx-auto px-2 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img class="img-fluid" src="img/soeg.webp" alt="søgefunktion"
+                                                                                                                       style="max-height: 40px"></div>
+                        <div class="dropdown-menu" style="width: 40vw">
+                            <form class="d-flex dropdown-item" role="search">
+                                <input id="dropupSearchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" autofocus/>
+                                <button class="btn btn-wine" type="submit">SØG</button>
+                            </form>
+
+                        </div></div>
                     <div class="mx-auto"><img class="img-fluid" src="img/kurv.webp" alt="kurv med varer"
                                               style="max-height: 40px"></div>
                     <div class="mx-auto"><img class="img-fluid" src="img/bruger.webp"
-                                              alt="log in eller din brugerprofil" style="max-height: 40px"></div>
+                                              alt="login eller din brugerprofil" style="max-height: 40px"></div>
                 </div>
             </div>
         </nav>
     </div>
 </header>
 
-<footer class="fixed-bottom botnav bg-cream py-1 d-xxl-none">
+<footer class="fixed-bottom botnav py-1 d-xxl-none blur bg-opacity-100" style="height: 7vh">
     <div class="container">
         <nav class="row d-flex justify-content-end">
             <div class="col-auto d-flex justify-content-end">
-                <div class="mx-auto px-2"><img class="img-fluid" src="img/soeg.webp" alt="søgefunktion"
-                                          style="max-height: 40px"></div>
-                <div class="mx-auto px-2"><img class="img-fluid" src="img/kurv.webp" alt="kurv med varer"
-                                          style="max-height: 40px"></div>
                 <div class="mx-auto px-2"><img class="img-fluid" src="img/bruger.webp"
-                                          alt="log in eller din brugerprofil" style="max-height: 40px"></div>
+                                               alt="login eller din brugerprofil" style="max-height: 40px"></div>
+                <div class="mx-auto px-2"><img class="img-fluid" src="img/kurv.webp" alt="kurv med varer"
+                                               style="max-height: 40px"></div>
+                <div id="searchbutt" class="dropup">
+                <div class="mx-auto px-2 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img class="img-fluid" src="img/soeg.webp" alt="søgefunktion"
+                                          style="max-height: 40px"></div>
+                <div class="dropdown-menu" style="width: 40vw">
+                    <form class="d-flex dropdown-item" role="search">
+                        <input id="dropupSearchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" autofocus/>
+                        <button class="btn btn-wine" type="submit">SØG</button>
+                    </form>
+
+                </div></div> <!-- dropup -->
             </div>
             <div class="col-auto d-flex justify-content-end">
                 <div class="dropup">
-                    <button class="btn btn-wine dropdown-toggle" type="button" data-bs-auto-close="outside"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-wine dropdown-toggle btn-lg" type="button" data-bs-auto-close="outside"
+                            data-bs-toggle="dropdown" aria-expanded="false" style="height: 100%">
                         Shop
                     </button>
                     <ul class="dropdown-menu bg-champagne">
                         <li class="dropstart">
                             <?php foreach ($overkategorier as $overkategori) {
                                 $ovkatid = $overkategori->overkateid; ?>
-                                <a class="dropdown-item dropdown-toggle"
+                                <a class="dropdown-item dropdown-toggle fs-4"
                                    data-bs-toggle="dropdown"><?php echo $overkategori->overkatenavn; ?></a>
                                 <div class="dropdown-menu mheadside bg-champagne">
                                     <!-- ikke den bedste løsning med fast enhed-->
@@ -85,15 +101,15 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                                         foreach ($kategorier as $kategori) { ?>
                                             <div class="col-12 col-md-6"><a
                                                         href="kategori.php?kateid=<?php echo $kategori->kateid; ?>"
-                                                        class="dropdown-item"><?php echo $kategori->katenavn ?></a>
+                                                        class="dropdown-item fs-4"><?php echo $kategori->katenavn ?></a>
                                             </div>
                                         <?php } ?>
                                     </div>
                                 </div>
                             <?php } ?>
                         </li>
-                        <li><a href="omos.php" class="dropdown-item">OM OS</a></li>
-                        <li><a href="blog.php" class="dropdown-item">BLOG</a></li>
+                        <li><a href="omos.php" class="dropdown-item fs-4">OM OS</a></li>
+                        <li><a href="blog.php" class="dropdown-item fs-4">BLOG</a></li>
                     </ul>
                 </div>
             </div>

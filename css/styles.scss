@@ -27,8 +27,15 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 .logo{
 	max-height: 5vh;
 }
+
+.blur{
+	backdrop-filter: blur(10px); /* the blur effect */
+	-webkit-backdrop-filter: blur(10px); /* Safari support */
+	z-index: 1030; /* ensure it's above other elements */
+}
+
 .page-content{
-	margin-top: 6vh;
+	margin-top: 5vh;
 	//font
 }
 
@@ -51,7 +58,7 @@ select[disabled] {
 
 @media only screen and (min-width: 768px) {
 	.mheadside{
-		min-width: 400px;
+		min-width: 500px;
 	}
 }
 
