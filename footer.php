@@ -4,7 +4,7 @@
 <footer class="footer-downer bg-wine bottom-100 text-champagne">
     <div class="container">
         <div class="row">
-            <div class="col-12 mt-4">
+            <div class="col-12 col-lg-3 mt-4">
                 <p class="h2 mb-4 fw-bolder text-center border-bottom border-3 border-champagne pb-3">Vinkompagni</p>
                 <p class="mb-1">Middelfart 2, 4200 Slagelse</p>
                 <p class="mb-1">Danmark</p>
@@ -12,14 +12,14 @@
                 <p class="mb-1">Email: ordre@slagelsevinkompagni.dk</p>
                 <p class="mb-1">Cvr. nummer: 2723 4720</p>
             </div>
-            <div class="col-12 mt-4">
+            <div class="col-12 col-lg-3 mt-4">
                 <p class="h2 mb-4 fw-bolder text-center border-bottom border-3 border-champagne pb-3">Information</p>
                 <p class="mb-1">Om os</p>
                 <p class="mb-1">Bestilling og levering</p>
                 <p class="mb-1">Kontakt os</p>
                 <p class="mb-1">Hjælp</p>
             </div>
-            <div class="col-12 mt-4">
+            <div class="col-12 col-lg-3 mt-4">
                 <p class="h2 mb-4 fw-bolder text-center border-bottom border-3 border-champagne pb-3">Åbningstider</p>
                 <div class="row">
                     <div class="col-3">
@@ -80,7 +80,7 @@
                     <div class="col-1"></div>
                 </div>
             </div>
-            <div class="col-12 mt-4">
+            <div class="col-12 col-lg-3 mt-4">
                 <p class="h2 mb-4 fw-bolder text-center border-bottom border-3 border-champagne pb-3">SoMe & Sponsorer</p>
             </div>
         </div>
