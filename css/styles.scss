@@ -33,9 +33,17 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 	-webkit-backdrop-filter: blur(10px); /* Safari support */
 	z-index: 1030; /* ensure it's above other elements */
 }
+.dropdown-columns {
+	column-count: 2; /* You can change this to 3 if needed */
+	column-gap: 1.5rem;
+}
+
+.dropdown-columns > div {
+	break-inside: avoid;
+}
 
 .page-content{
-	margin-top: 5vh;
+	padding-top: 5vh;
 	//font
 }
 
