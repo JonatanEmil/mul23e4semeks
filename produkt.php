@@ -111,10 +111,8 @@ foreach ($prodbutikker as $prodbutik) {
         </div>
     </div>
 </div>
-<br>
-<br>
-<br>
-<br>
+
+<?php include "footer.php"; ?>
 
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
