@@ -23,77 +23,74 @@
             </div>
             <div class="col-12 col-lg-3 mt-4">
                 <p class="h2 mb-4 fw-bolder text-center border-bottom border-3 pb-3">Åbningstider</p>
-                <div class="row">
+                <div class="row text-center">
                     <div class="col-3">
                         Mandag
                     </div>
-                    <div class="col-5 border-bottom"></div>
+                    <div class="col-6 border-bottom mb-1"></div>
                     <div class="col-3">
                         <p class="m-0">10-17</p>
                     </div>
-                    <div class="col-1"></div>
                     <div class="col-3">
                         Tirsdag
                     </div>
-                    <div class="col-5 border-bottom"></div>
+                    <div class="col-6 border-bottom mb-1"></div>
                     <div class="col-3">
                         <p class="m-0">10-17</p>
                     </div>
-                    <div class="col-1"></div>
                     <div class="col-3">
                         Onsdag
                     </div>
-                    <div class="col-5 border-bottom"></div>
+                    <div class="col-6 border-bottom mb-1"></div>
                     <div class="col-3">
                         <p class="m-0">10-17</p>
                     </div>
-                    <div class="col-1"></div>
                     <div class="col-3">
                         Torsdag
                     </div>
-                    <div class="col-5 border-bottom"></div>
+                    <div class="col-6 border-bottom mb-1"></div>
                     <div class="col-3">
                         <p class="m-0">10-17</p>
                     </div>
-                    <div class="col-1"></div>
                     <div class="col-3">
                         Fredag
                     </div>
-                    <div class="col-5 border-bottom"></div>
+                    <div class="col-6 border-bottom mb-1"></div>
                     <div class="col-3">
                         <p class="m-0">10-17</p>
                     </div>
-                    <div class="col-1"></div>
                     <div class="col-3">
                         Lørdag
                     </div>
-                    <div class="col-5 border-bottom"></div>
+                    <div class="col-6 border-bottom mb-1"></div>
                     <div class="col-3">
                         <p class="m-0">10-14</p>
                     </div>
-                    <div class="col-1"></div>
                     <div class="col-3">
                         Søndag
                     </div>
-                    <div class="col-5 border-bottom"></div>
+                    <div class="col-6 border-bottom mb-1"></div>
                     <div class="col-3">
                         <p class="m-0">10-14</p>
                     </div>
-                    <div class="col-1"></div>
                 </div>
             </div>
             <div class="col-12 col-lg-3 mt-4">
                 <p class="h2 mb-4 fw-bolder text-center border-bottom border-3 pb-3 fs-2">SoMe & Sponsorer</p>
-                <div class="d-flex row-cols-4 text-center">
+                <div class="d-flex row-cols-4 text-center" style="font-size: 30px;">
                     <a><i class="fa-brands fa-facebook"></i></a>
                     <a><i class="fa-brands fa-instagram "></i></a>
                     <a><i class="fa-brands fa-linkedin"></i></a>
                     <a><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
-            <div class="col-12 mt-4">
-                <p class="h2 mb-4 text-center">Betalings muligheder</p>
-                </div>
+            <div class="col-12 mt-5 text-center" style="font-size: 25px;">
+                <p class="fs-4 mb-2 fw-light"><i class="fa-regular fa-credit-card"></i> Betalings muligheder</p>
+                <i class="ms-2 me-2 fa-brands fa-cc-visa"></i>
+                <i class="ms-2 me-2 fa-brands fa-cc-mastercard"></i>
+                <i class="ms-2 me-2 fa-brands fa-cc-paypal"></i>
+                <i class="ms-2 me-2 fa-brands fa-cc-apple-pay"></i>
+                <i class="ms-2 me-2 fa-brands fa-google-pay"></i>
             </div>
             <div class="col-12 text-center mt-5 mb-5">
                 <p><i class="fa-regular fa-copyright"></i> Copyright 2025</p>

@@ -38,7 +38,6 @@ foreach ($prodbutikker as $prodbutik) {
 
 <body class="bg-cream">
 <?php include "header.php"; ?>
-<br>
 <div class="container bg-rose rounded-3">
     <div class="row g-3 page-content text-port align-items-xl-center">
         <h1 class="mb-0 mt-2 fw-bolder d-lg-none"><?php echo $produkt->prodnavn; ?></h1>
