@@ -19,6 +19,12 @@ $prodbutikarr = [];
 foreach ($prodbutikker as $prodbutik) {
     $prodbutikarr[] = $prodbutik->butikid; // OBS: bruger butikid her
 }
+$bindkate = [];
+if (!empty($_GET['kateid'])) {
+    $bindkate[":kateid"] = $_GET['kateid'];
+}
+$kategorier = $db->sql('SELECT * FROM kategorier WHERE kateid=:kateid', $bindkate);
+$kategori = $kategorier[0];
 ?>
 <!DOCTYPE html>
 <html lang="da">
@@ -38,10 +44,24 @@ foreach ($prodbutikker as $prodbutik) {
 
 <body class="bg-cream">
 <?php include "header.php"; ?>
-<div class="container bg-rose rounded-3">
-    <div class="row g-3 page-content text-port align-items-xl-center">
+<div class="container page-content rounded-3">
+    <div class="d-flex align-items-center">
+        <a href="kategori.php?kateid=<?php echo $kategori->kateid ?>" class="h3 mb-0 text-decoration-none text-dark">
+            <?php echo $kategori->katenavn ?>
+        </a>
+        <span class="h3 mx-2 mb-0">→</span>
+        <a href="produkt.php?kateid=<?php echo $kategori->kateid ?>&prodid=<?php echo $produkt->prodid ?>" class="h3 mb-0 text-decoration-none text-dark">
+            <?php echo $produkt->prodnavn ?>
+        </a>
+    </div>
+    <div class="row g-3 page-content text-port align-items-xl-center mt-0 pt-0">
         <h1 class="mb-0 mt-2 fw-bolder d-lg-none"><?php echo $produkt->prodnavn; ?></h1>
-        <p class="m-0 fs-4 fw-semibold d-lg-none"><?php echo $produkt->landenavn; ?></p>
+        <div class="row d-flex align-items-center">
+            <div class="col-2">
+                <img class="img-fluid d-lg-none" src="img/flag/<?php echo $produkt->landeimg; ?>" alt="<?php echo $produkt->landenavn; ?>s flag"></div>
+            <div class="col-10">
+                <p class="m-0 fs-4 fw-semibold d-lg-none"><?php echo $produkt->landenavn; ?></p></div>
+        </div>
         <p class="display-2 fw-bold d-lg-none mb-0">Kr. <?php echo $produkt->prodpris ?> pr. stk.</p>
         <?php if ($produkt->prodkasse === 1) { ?>
             <p class="h5 fw-bold text-wine d-lg-none m-0">Kassepris (6 flasker):
@@ -68,8 +88,13 @@ foreach ($prodbutikker as $prodbutik) {
             </div>
         </div>
         <div class="col-12 col-lg-7">
-            <h1 class="mb-0 mt-2 d-none d-lg-block"><?php echo $produkt->prodnavn; ?></h1>
-            <p class="fs-4 d-none d-lg-block"><?php echo $produkt->landenavn; ?></p>
+            <h1 class="mb-0 mt-2 d-none d-lg-block card-title"><?php echo $produkt->prodnavn; ?></h1>
+            <div class="row d-flex align-items-center">
+                <div class="col-2">
+                <img class="img-fluid d-lg-block d-none" src="img/flag/<?php echo $produkt->landeimg; ?>" alt="<?php echo $produkt->landenavn; ?>s flag"></div>
+                <div class="col-10">
+                <p class="m-0 fs-4 fw-semibold d-lg-block d-none"><?php echo $produkt->landenavn; ?></p></div>
+            </div>
             <div class="row d-flex justify-content-start align-items-center flex-wrap">
                 <?php foreach ($madikoner as $ikon) { ?>
                     <div class="col-auto mt-2 mb-2">
@@ -89,14 +114,16 @@ foreach ($prodbutikker as $prodbutik) {
             <p class="h5 mt-3 mt-lg-5 fs-6">Tilgængelig i disse butikker:</p>
             <div class="row me-xl-2">
                 <div class="col-5 col-xl-3">
-                    <select name="butikker" class="form-select bg-champagne" multiple aria-label="butikker" disabled>
-                        <?php foreach ($allebutikker as $butik) { ?>
-                            <option class="text-port" value="<?php echo $butik->butikid ?>"
-                                <?php echo in_array($butik->butikid, $prodbutikarr) ? "selected" : ""; ?>>
-                                <?php echo $butik->butiknavn ?>
-                            </option>
-                        <?php } ?>
-                    </select>
+                    <div class="bg-champagne border rounded p-2">
+                        <?php foreach ($allebutikker as $butik): ?>
+                            <?php $erValgt = in_array($butik->butikid, $prodbutikarr); ?>
+                            <div class="d-flex align-items-center mb-1 p-1 rounded
+                    <?php echo $erValgt ? 'bg-wine text-champagne fw-bold' : 'text-port'; ?>">
+                                <i class="fa-solid <?php echo $erValgt ? 'fa-check me-2' : 'fa-xmark me-2'; ?>"></i>
+                                <span><?php echo htmlspecialchars($butik->butiknavn); ?></span>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
                 <div class="col-7 col-xl-9 d-flex justify-content-end">
                     <button class="btn btn-wine mt-5">Læg i kurv</button>
@@ -119,5 +146,7 @@ foreach ($prodbutikker as $prodbutik) {
 <?php include "footer.php"; ?>
 
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/96a3a7d865.js" crossorigin="anonymous"></script>
+<script src="global.js"></script>
 </body>
 </html>

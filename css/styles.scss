@@ -21,8 +21,14 @@ $custom-colors: (
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
 @import "bootstrapComponents";
+@import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 // 5. Du kan lave styling her...
+
+header{
+	font-family: "Alkatra", system-ui;
+	font-optical-sizing: auto;
+}
 
 .logo{
 	max-height: 5vh;
@@ -47,7 +53,9 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 	padding-bottom: 1vh;
 	padding-top: 1vh;
 	border-radius: 1vh;
-	//font
+	background-color: #AB958A;
+	font-family: "Montserrat", sans-serif;
+	font-optical-sizing: auto;
 }
 
 select[disabled] {
@@ -65,6 +73,13 @@ select[disabled] {
 
 .product-image-size-big {
 	max-height: 925px;
+}
+
+.card{
+	background-color: #E1D5C9;
+}
+.card-title{
+	font-weight: bold;
 }
 
 @media only screen and (min-width: 768px) {

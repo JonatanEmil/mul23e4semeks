@@ -24,7 +24,8 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                                     <?php $kategorier = $db->sql('SELECT * FROM kategorier INNER JOIN overkat_underkat_con ON kateid = underkatid WHERE overkatid = :overkatid ', ['overkatid' => $ovkatid]);
                                     foreach ($kategorier as $kategori) { ?>
                                         <div class="col-auto d-flex flex-column justify-content-center">
-                                            <a href="kategori.php?kateid=<?php echo $kategori->kateid; ?>" class="dropdown-item fw-semibold d-flex flex-column text-center">
+                                            <a href="kategori.php?kateid=<?php echo $kategori->kateid; ?>"
+                                               class="dropdown-item fw-semibold d-flex flex-column text-center">
                                                 <img class="img-fluid mx-auto"
                                                      src="img/kategorier/<?php echo $kategori->kateimg ?>"
                                                      alt="<?php echo $kategori->katenavn ?>"
@@ -32,6 +33,14 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                                                 <span><?php echo $kategori->katenavn ?></span>
                                             </a>
                                         </div>
+                                        <?php if ($kategori->kateid === 32) { ?>
+                                            <div class="col-auto d-flex flex-column justify-content-center">
+                                                <p class="h3">BOOK EN SMAGNING</p>
+                                            </div>
+                                            <div class="col-auto d-flex flex-column justify-content-center">
+                                                <p class="h3">VORES BEGIVENHEDER</p>
+                                            </div>
+                                        <?php } ?>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -69,7 +78,7 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
     </div>
 </header>
 
-<footer class="fixed-bottom botnav py-1 d-xxl-none blur bg-opacity-100" style="height: 7vh">
+<header class="fixed-bottom botnav py-1 d-xxl-none blur bg-opacity-100" style="height: 7vh">
     <div class="container text-port">
         <nav class="row d-flex justify-content-end">
             <div class="col-auto d-flex justify-content-end">
@@ -109,7 +118,8 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                                         $kategorier = $db->sql('SELECT * FROM kategorier INNER JOIN overkat_underkat_con ON kateid = underkatid WHERE overkatid = :overkatid', ['overkatid' => $ovkatid]);
                                         foreach ($kategorier as $kategori) { ?>
                                             <div class="d-flex align-items-center mb-2">
-                                                <a href="kategori.php?kateid=<?php echo $kategori->kateid; ?>" class="d-flex align-items-center mb-2 text-decoration-none text-port">
+                                                <a href="kategori.php?kateid=<?php echo $kategori->kateid; ?>"
+                                                   class="d-flex align-items-center mb-2 text-decoration-none text-port">
                                                     <img src="img/kategorier/<?php echo $kategori->kateimg ?>"
                                                          alt="<?php echo $kategori->katenavn ?>"
                                                          class="me-2" style="max-height: 50px;">
@@ -128,4 +138,4 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
             </div>
         </nav>
     </div>
-</footer>
+</header>

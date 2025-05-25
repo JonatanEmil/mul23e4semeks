@@ -13,7 +13,7 @@ $idList = implode(",", $ids);
 $sql = "
     SELECT 
         produkter.*, 
-        lande.landenavn, 
+        lande.*, 
         kategorier.katenavn, 
         kategorier.kateid 
     FROM produkter 
@@ -58,16 +58,16 @@ foreach ($produktData as $row) {
 
 <body class="bg-champagne">
 <?php include "header.php"; ?>
-<div class="container page-content bg-cream">
+<div class="container page-content">
     <div class="row">
         <div class="col-12">
             <div>
-                <img class="img-fluid" src="img/herolarge.webp" alt="Fordi hvert glas har sin anledning - Hero Image">
+                <img class="img-fluid rounded-2" src="img/herolarge.webp" alt="Fordi hvert glas har sin anledning - Hero Image">
             </div>
             <div class="col-12 row g-2">
                 <p class="h1 text-center text-port">Produkter anbefalet af os:</p>
                 <?php foreach ($produkter as $produkt) { ?>
-                    <div class="col-12 col-sm-6 col-lg-3 d-flex">
+                    <div class="col-12 col-sm-6 col-xl-3 d-flex">
                         <div class="card mb-3 p-2 h-100 w-100">
                             <h5 class="card-title"><?php echo $produkt->prodnavn ?></h5>
                             <div class="row">
@@ -75,15 +75,23 @@ foreach ($produktData as $row) {
                                     <img src="img/produkter/<?php echo $produkt->prodimg ?>" class="img-fluid" alt="<?php echo $produkt->prodnavn ?> - Vinkompagnierne" style="height: 20vh">
                                 </div>
                                 <div class="col-8">
-                                    <div class="card-body">
-                                        <p>Kr. <?php echo $produkt->prodpris ?> pr. stk.</p>
+                                    <div class="card-body fw-semibold">
+                                        <p>Kr. <?php echo number_format($produkt->prodpris, 2, ",", ""); ?> pr. stk.</p>
 
                                         <?php if ($produkt->prodkasse === 1): ?>
-                                            <p>Kr. <?php echo $produkt->prodkassepris ?> pr. kasse</p>
+                                            <p>Kr. <?php echo number_format($produkt->prodkassepris, 2, ",", ""); ?> pr. kasse</p>
                                         <?php endif; ?>
+                                        <button class="btn btn-wine mb-1">Læg i kurv</button>
 
                                         <?php if (!empty($produkt->landenavn)): ?>
+                                        <div class="row d-flex align-items-center">
+                                            <div class="col-auto">
                                             <p class="card-text"><?php echo $produkt->landenavn ?></p>
+                                            </div>
+                                            <div class="col-3 p-1">
+                                                <img class="img-fluid" src="img/flag/<?php echo $produkt->landeimg ?>" alt="<?php echo $produkt->landenavn ?>s flag">
+                                            </div>
+                                        </div>
                                         <?php endif; ?>
 
                                         <?php if (!empty($produkt->prodomraade)): ?>
@@ -101,6 +109,9 @@ foreach ($produktData as $row) {
                                     </div>
                                 </div>
                             </div>
+                            <div class="row d-flex justify-content-center">
+                            <button class="btn btn-wine mb-1 w-50">Læs mere:</button>
+                            </div>
                         </div>
                     </div>
                 <?php } ?>
@@ -115,13 +126,6 @@ foreach ($produktData as $row) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-<script>
-    const dropupElement = document.querySelector('#searchbutt');
-    const input = document.querySelector('#dropupSearchInput');
-    dropupElement.addEventListener('shown.bs.dropdown', function () {
-        input.focus();
-    });
-</script>
+<script src="global.js"></script>
 </body>
 </html>
