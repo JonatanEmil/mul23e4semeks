@@ -44,17 +44,20 @@ foreach ($prodbutikker as $prodbutik) {
         <p class="m-0 fs-4 fw-semibold d-lg-none"><?php echo $produkt->landenavn; ?></p>
         <p class="display-2 fw-bold d-lg-none mb-0">Kr. <?php echo $produkt->prodpris ?> pr. stk.</p>
         <?php if ($produkt->prodkasse === 1) { ?>
-            <p class="h5 fw-bold text-wine d-lg-none m-0">Kassepris (6 flasker): Kr. <?php echo $produkt->prodkassepris ?> pr. kasse.</p>
+            <p class="h5 fw-bold text-wine d-lg-none m-0">Kassepris (6 flasker):
+                Kr. <?php echo $produkt->prodkassepris ?> pr. kasse.</p>
         <?php } ?>
         <div class="col-12 d-md-none">
             <div class="d-flex justify-content-center bg-champagne rounded-2 pt-3 pb-2 me-xl-3 mb-3">
-                <img class="img-fluid product-image-size-small" style="" src="img/produkter/<?php echo $produkt->prodimg; ?>"
+                <img class="img-fluid product-image-size-small" style=""
+                     src="img/produkter/<?php echo $produkt->prodimg; ?>"
                      alt="<?php echo $produkt->prodnavn; ?> - Vinkompagnierne">
             </div>
         </div>
         <div class="col-12 d-none d-md-block d-lg-none">
             <div class="d-flex justify-content-center bg-champagne rounded-2 pt-3 pb-2 me-xl-3 mb-3">
-                <img class="img-fluid product-image-size-medium" style="" src="img/produkter/<?php echo $produkt->prodimg; ?>"
+                <img class="img-fluid product-image-size-medium" style=""
+                     src="img/produkter/<?php echo $produkt->prodimg; ?>"
                      alt="<?php echo $produkt->prodnavn; ?> - Vinkompagnierne">
             </div>
         </div>
@@ -70,7 +73,8 @@ foreach ($prodbutikker as $prodbutik) {
             <div class="row d-flex justify-content-start align-items-center flex-wrap">
                 <?php foreach ($madikoner as $ikon) { ?>
                     <div class="col-auto mt-2 mb-2">
-                        <img class="d-none d-lg-block" style="max-height: 75px;" src="img/ikoner/<?php echo $ikon->ikonimg ?>"
+                        <img class="d-none d-lg-block" style="max-height: 75px;"
+                             src="img/ikoner/<?php echo $ikon->ikonimg ?>"
                              alt="<?php echo $ikon->ikonnavn ?>">
                         <img class="d-lg-none" style="max-height: 55px;" src="img/ikoner/<?php echo $ikon->ikonimg ?>"
                              alt="<?php echo $ikon->ikonnavn ?>">
@@ -79,23 +83,24 @@ foreach ($prodbutikker as $prodbutik) {
             </div>
             <p class="display-2 fw-bold d-none d-lg-block">Kr. <?php echo $produkt->prodpris ?> pr. stk.</p>
             <?php if ($produkt->prodkasse === 1) { ?>
-                <p class="h5 fw-bold text-wine d-none d-lg-block">Kassepris (6 flasker): Kr. <?php echo $produkt->prodkassepris ?> pr. kasse.</p>
+                <p class="h5 fw-bold text-wine d-none d-lg-block">Kassepris (6 flasker):
+                    Kr. <?php echo $produkt->prodkassepris ?> pr. kasse.</p>
             <?php } ?>
             <p class="h5 mt-3 mt-lg-5 fs-6">Tilgængelig i disse butikker:</p>
             <div class="row me-xl-2">
-            <div class="col-5 col-xl-3">
-                <select name="butikker" class="form-select bg-champagne" multiple aria-label="butikker" disabled>
-                    <?php foreach ($allebutikker as $butik) { ?>
-                        <option class="text-port" value="<?php echo $butik->butikid ?>"
-                            <?php echo in_array($butik->butikid, $prodbutikarr) ? "selected" : ""; ?>>
-                            <?php echo $butik->butiknavn ?>
-                        </option>
-                    <?php } ?>
-                </select>
-            </div>
-            <div class="col-7 col-xl-9 d-flex justify-content-end">
-                <button class="btn btn-wine mt-5">Læg i kurv</button>
-            </div>
+                <div class="col-5 col-xl-3">
+                    <select name="butikker" class="form-select bg-champagne" multiple aria-label="butikker" disabled>
+                        <?php foreach ($allebutikker as $butik) { ?>
+                            <option class="text-port" value="<?php echo $butik->butikid ?>"
+                                <?php echo in_array($butik->butikid, $prodbutikarr) ? "selected" : ""; ?>>
+                                <?php echo $butik->butiknavn ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="col-7 col-xl-9 d-flex justify-content-end">
+                    <button class="btn btn-wine mt-5">Læg i kurv</button>
+                </div>
                 <div class="d-none d-lg-block col-12 mt-3">
                     <br>
                     <p class="h3 mt-3">Beskrivelse:</p>

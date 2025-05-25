@@ -24,12 +24,13 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                                     <?php $kategorier = $db->sql('SELECT * FROM kategorier INNER JOIN overkat_underkat_con ON kateid = underkatid WHERE overkatid = :overkatid ', ['overkatid' => $ovkatid]);
                                     foreach ($kategorier as $kategori) { ?>
                                         <div class="col-auto d-flex flex-column justify-content-center">
-                                            <img class="img-fluid align-self-center"
-                                                 src="img/kategorier/<?php echo $kategori->kateimg ?>"
-                                                 alt="<?php echo $kategori->katenavn ?>"
-                                                 style="max-height: 50px; height: auto; width: auto;">
-                                            <a href="kategori.php?kateid=<?php echo $kategori->kateid; ?>"
-                                               class="dropdown-item"><?php echo $kategori->katenavn ?></a>
+                                            <a href="kategori.php?kateid=<?php echo $kategori->kateid; ?>" class="dropdown-item fw-semibold d-flex flex-column text-center">
+                                                <img class="img-fluid mx-auto"
+                                                     src="img/kategorier/<?php echo $kategori->kateimg ?>"
+                                                     alt="<?php echo $kategori->katenavn ?>"
+                                                     style="max-height: 50px; height: auto; width: auto;">
+                                                <span><?php echo $kategori->katenavn ?></span>
+                                            </a>
                                         </div>
                                     <?php } ?>
                                 </div>
@@ -69,7 +70,7 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
 </header>
 
 <footer class="fixed-bottom botnav py-1 d-xxl-none blur bg-opacity-100" style="height: 7vh">
-    <div class="container">
+    <div class="container text-port">
         <nav class="row d-flex justify-content-end">
             <div class="col-auto d-flex justify-content-end">
                 <div class="mx-auto px-2"><img class="img-fluid" src="img/bruger.webp"
@@ -103,17 +104,16 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                                 <a class="dropdown-item dropdown-toggle fs-4"
                                    data-bs-toggle="dropdown"><?php echo $overkategori->overkatenavn; ?></a>
                                 <div class="dropdown-menu mheadside bg-champagne">
-                                    <div class="dropdown-columns">
+                                    <div class="dropdown-columns fw-semibold">
                                         <?php
                                         $kategorier = $db->sql('SELECT * FROM kategorier INNER JOIN overkat_underkat_con ON kateid = underkatid WHERE overkatid = :overkatid', ['overkatid' => $ovkatid]);
                                         foreach ($kategorier as $kategori) { ?>
                                             <div class="d-flex align-items-center mb-2">
-                                                <img src="img/kategorier/<?php echo $kategori->kateimg ?>"
-                                                     alt="<?php echo $kategori->katenavn ?>"
-                                                     class="me-2" style="max-height: 50px;">
-                                                <a href="kategori.php?kateid=<?php echo $kategori->kateid; ?>"
-                                                   class="fs-5 text-decoration-none text-dark">
-                                                    <?php echo $kategori->katenavn ?>
+                                                <a href="kategori.php?kateid=<?php echo $kategori->kateid; ?>" class="d-flex align-items-center mb-2 text-decoration-none text-port">
+                                                    <img src="img/kategorier/<?php echo $kategori->kateimg ?>"
+                                                         alt="<?php echo $kategori->katenavn ?>"
+                                                         class="me-2" style="max-height: 50px;">
+                                                    <span class="fs-5"><?php echo $kategori->katenavn ?></span>
                                                 </a>
                                             </div>
                                         <?php } ?>

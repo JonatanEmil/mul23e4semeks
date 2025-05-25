@@ -42,8 +42,11 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 	break-inside: avoid;
 }
 
-.page-content{
-	padding-top: 5vh;
+.page-content {
+	margin-top: 7vh;
+	padding-bottom: 1vh;
+	padding-top: 1vh;
+	border-radius: 1vh;
 	//font
 }
 
