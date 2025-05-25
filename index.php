@@ -56,7 +56,7 @@ foreach ($produktData as $row) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body class="bg-champagne">
+<body>
 <?php include "header.php"; ?>
 <div class="container page-content">
     <div class="row">

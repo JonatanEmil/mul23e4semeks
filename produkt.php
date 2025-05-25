@@ -42,7 +42,7 @@ $kategori = $kategorier[0];
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body class="bg-cream">
+<body>
 <?php include "header.php"; ?>
 <div class="container page-content rounded-3">
     <div class="d-flex align-items-center">

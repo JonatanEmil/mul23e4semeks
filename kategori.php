@@ -51,18 +51,18 @@ $kategori = $kategorier[0];
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body class="bg-champagne">
+<body>
 <?php include "header.php"; ?>
 <div class="container">
     <div class="row g-4 d-flex page-content bg-rose">
-        <p class="h3"><?php echo $kategori->katenavn ?></p>
+        <p class="h3 m-0"><?php echo $kategori->katenavn ?></p>
         <div class="col-12 col-md-3">
             <div>
                 <div class="bg-cream w-100 fw-bold fs-4 text-port text-center">
-                    Filtre (tragt)
+                    Filtre <i class="fa-solid fa-arrow-down-wide-short"></i>
                 </div>
                 <button class="btn btn-cream w-100 btn-lg fs-4 fw-bold rounded-0 landefilter">
-                    Lande
+                    Lande <i class="fa-solid fa-arrows-up-down"></i>
                 </button>
                 <div class="border-2 border border-cream bg-champagne landefiltercontainer d-none">
                     <?php $selectedLande = !empty($_GET['lande']) ? explode(",", $_GET['lande']) : [];

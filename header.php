@@ -19,7 +19,7 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                             <a class="dropdown-toggle nav-link p-0 fs-5" type="button" data-bs-toggle="dropdown">
                                 <?php echo $overkategori->overkatenavn; ?>
                             </a>
-                            <div class="dropdown-menu bg-champagne" style="width: 100vw">
+                            <div class="dropdown-menu bg-cream" style="width: 100vw">
                                 <div class="row d-flex justify-content-center">
                                     <?php $kategorier = $db->sql('SELECT * FROM kategorier INNER JOIN overkat_underkat_con ON kateid = underkatid WHERE overkatid = :overkatid ', ['overkatid' => $ovkatid]);
                                     foreach ($kategorier as $kategori) { ?>
@@ -48,7 +48,7 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                     <?php } ?>
                     <div class="nav-item dropdown">
                         <a class="dropdown-toggle nav-link p-0 fs-5" type="button" data-bs-toggle="dropdown">INFO</a>
-                        <div class="dropdown-menu bg-champagne">
+                        <div class="dropdown-menu bg-cream">
                             <a href="omos.php" class="dropdown-item">OM OS</a>
                             <a href="blog.php" class="dropdown-item">BLOG</a>
                         </div>
@@ -106,13 +106,13 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                             data-bs-toggle="dropdown" aria-expanded="false" style="height: 100%">
                         Shop
                     </button>
-                    <ul class="dropdown-menu bg-champagne">
+                    <ul class="dropdown-menu bg-cream">
                         <li class="dropstart">
                             <?php foreach ($overkategorier as $overkategori) {
                                 $ovkatid = $overkategori->overkateid; ?>
                                 <a class="dropdown-item dropdown-toggle fs-4"
                                    data-bs-toggle="dropdown"><?php echo $overkategori->overkatenavn; ?></a>
-                                <div class="dropdown-menu mheadside bg-champagne">
+                                <div class="dropdown-menu mheadside bg-cream">
                                     <div class="dropdown-columns fw-semibold">
                                         <?php
                                         $kategorier = $db->sql('SELECT * FROM kategorier INNER JOIN overkat_underkat_con ON kateid = underkatid WHERE overkatid = :overkatid', ['overkatid' => $ovkatid]);

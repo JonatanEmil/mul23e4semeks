@@ -25,6 +25,10 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 // 5. Du kan lave styling her...
 
+body{
+	background-color: #E1D5C9;
+}
+
 header{
 	font-family: "Alkatra", system-ui;
 	font-optical-sizing: auto;
@@ -56,6 +60,7 @@ header{
 	background-color: #AB958A;
 	font-family: "Montserrat", sans-serif;
 	font-optical-sizing: auto;
+	color: #333333;
 }
 
 select[disabled] {
