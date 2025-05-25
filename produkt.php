@@ -62,10 +62,10 @@ $kategori = $kategorier[0];
             <div class="col-10">
                 <p class="m-0 fs-4 fw-semibold d-lg-none"><?php echo $produkt->landenavn; ?></p></div>
         </div>
-        <p class="display-2 fw-bold d-lg-none mb-0">Kr. <?php echo $produkt->prodpris ?> pr. stk.</p>
+        <p class="display-2 fw-bold d-lg-none mb-0">Kr. <?php echo number_format($produkt->prodpris, 2, ",", ""); ?> pr. stk.</p>
         <?php if ($produkt->prodkasse === 1) { ?>
             <p class="h5 fw-bold text-wine d-lg-none m-0">Kassepris (6 flasker):
-                Kr. <?php echo $produkt->prodkassepris ?> pr. kasse.</p>
+                Kr. <?php echo number_format($produkt->prodkassepris, 2, ",", ""); ?> pr. kasse.</p>
         <?php } ?>
         <div class="col-12 d-md-none">
             <div class="d-flex justify-content-center bg-champagne rounded-2 pt-3 pb-2 me-xl-3 mb-3">
@@ -100,16 +100,16 @@ $kategori = $kategorier[0];
                     <div class="col-auto mt-2 mb-2">
                         <img class="d-none d-lg-block" style="max-height: 75px;"
                              src="img/ikoner/<?php echo $ikon->ikonimg ?>"
-                             alt="<?php echo $ikon->ikonnavn ?>">
+                             alt="<?php echo $ikon->ikonnavn ?>" title="<?php echo $ikon->ikonnavn ?>">
                         <img class="d-lg-none" style="max-height: 55px;" src="img/ikoner/<?php echo $ikon->ikonimg ?>"
-                             alt="<?php echo $ikon->ikonnavn ?>">
+                             alt="<?php echo $ikon->ikonnavn ?> " title="<?php echo $ikon->ikonnavn ?>">
                     </div>
                 <?php } ?>
             </div>
-            <p class="display-2 fw-bold d-none d-lg-block">Kr. <?php echo $produkt->prodpris ?> pr. stk.</p>
+            <p class="display-2 fw-bold d-none d-lg-block">Kr. <?php echo number_format($produkt->prodpris, 2, ",", ""); ?> pr. stk.</p>
             <?php if ($produkt->prodkasse === 1) { ?>
                 <p class="h5 fw-bold text-wine d-none d-lg-block">Kassepris (6 flasker):
-                    Kr. <?php echo $produkt->prodkassepris ?> pr. kasse.</p>
+                    Kr. <?php echo number_format($produkt->prodkassepris, 2, ",", ""); ?> pr. kasse.</p>
             <?php } ?>
             <p class="h5 mt-3 mt-lg-5 fs-6">Tilgængelig i disse butikker:</p>
             <div class="row me-xl-2">
