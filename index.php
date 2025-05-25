@@ -103,14 +103,11 @@ foreach ($produktData as $row) {
                                                 <?php echo implode(", ", $produkt->kategorier); ?>
                                             </p>
                                         <?php endif; ?>
-
+                                        <button class="btn btn-wine mb-1">Læs mere</button>
                                         <!-- Link med første kateid -->
                                         <a class="stretched-link" href="produkt.php?kateid=<?php echo $produkt->katids[0]; ?>&prodid=<?php echo $produkt->prodid; ?>"></a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row d-flex justify-content-center">
-                            <button class="btn btn-wine mb-1 w-50">Læs mere:</button>
                             </div>
                         </div>
                     </div>
