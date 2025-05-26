@@ -30,8 +30,9 @@ $bindkate = [];
 if (!empty($_GET['kateid'])) {
     $bindkate[":kateid"] = $_GET['kateid'];
 }
-$kategorier = $db->sql('SELECT * FROM kategorier WHERE kateid=:kateid', $bindkate);
-$kategori = $kategorier[0];
+$kategorierbroed = $db->sql('SELECT * FROM kategorier WHERE kateid=:kateid', $bindkate);
+$kategoribroed = $kategorierbroed[0];
+
 
 
 ?>
@@ -55,7 +56,7 @@ $kategori = $kategorier[0];
 <?php include "header.php"; ?>
 <div class="container">
     <div class="row g-4 d-flex page-content bg-rose">
-        <p class="h3 m-0"><?php echo $kategori->katenavn ?></p>
+        <p class="h3 m-0"><?php echo $kategoribroed->katenavn ?></p>
         <div class="col-12 col-md-3">
             <div>
                 <div class="bg-cream w-100 fw-bold fs-4 text-port text-center">
@@ -80,16 +81,20 @@ $kategori = $kategorier[0];
         </div>
         <div class="col-12 col-md-9">
             <div class="row g-3">
-                <?php foreach ($produkter as $produkt) { ?>
+                <?php foreach ($produkter as $produkt) {
+                    $imgsize = getimagesize("img/produkter/".$produkt->prodimg);
+                    $width = $imgsize[0];
+                    $height = $imgsize[1];?>
+
                     <div class="col-6 col-lg-4 d-flex">
                         <div class="card mb-3 px-1 h-100 w-100">
                             <!-- card content here -->
                             <h5 class="card-title text-center"><?php echo $produkt->prodnavn ?></h5>
                             <div class="row">
-                            <div class="col-4 d-flex justify-content-center">
-                                <img class="object-fit-contain" src="img/produkter/<?php echo $produkt->prodimg ?>" alt="<?php echo $produkt->prodnavn ?>" style="height: 20vh">
+                            <div class='<?php echo ($width > $height-200) ? "col-12 mt-2" : "col-4";?> d-flex justify-content-center'>
+                                <img class='object-fit-contain' src="img/produkter/<?php echo $produkt->prodimg ?>" alt="<?php echo $produkt->prodnavn ?>" style="height: 20vh">
                             </div>
-                            <div class="col-8">
+                            <div class='<?php echo ($width > $height-200) ? "col-12 ms-3" : "col-8";?>'>
                             <div class="card-body p-0 fw-semibold">
                                 <p>Kr. <?php echo number_format($produkt->prodpris, 2, ",", ""); ?> pr. stk.</p>
 

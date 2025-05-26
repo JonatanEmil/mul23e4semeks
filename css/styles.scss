@@ -29,6 +29,17 @@ body{
 	background-color: #E1D5C9;
 }
 
+nav{
+	background-color: rgba(255, 255, 255, 0) !important;
+	box-shadow: none !important;
+	display: flex  !important;
+	align-items: center !important;
+}
+
+.btn{
+	background-color: #642A38 !important;
+}
+
 header{
 	font-family: "Alkatra", system-ui;
 	font-optical-sizing: auto;
@@ -53,10 +64,10 @@ header{
 }
 
 .page-content {
-	margin-top: 7vh;
-	padding-bottom: 1vh;
-	padding-top: 1vh;
-	border-radius: 1vh;
+	margin-top: 7vh !important;
+	padding-bottom: 1vh !important;
+	padding-top: 1vh !important;
+	border-radius: 1vh !important;
 	background-color: #AB958A;
 	font-family: "Montserrat", sans-serif;
 	font-optical-sizing: auto;
@@ -80,11 +91,72 @@ select[disabled] {
 	max-height: 925px;
 }
 
+.landefilter{
+	background-color: #E1D5C9 !important;
+}
+
 .card{
-	background-color: #ECE8DF;
+	background-color: #ECE8DF !important;
 }
 .card-title{
 	font-weight: bold;
+}
+
+.overkategori{
+	color: #333333 !important;
+}
+
+.carousel .carousel-item {
+	height: 40vh;
+	transition: transform 0.4s ease;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: visible;
+}
+
+.carousel .carousel-item img {
+	max-height: 100%;
+	max-width: 100%;
+	object-fit: contain;
+	display: block;
+	margin: auto;
+}
+
+.carousel-fixed-item {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	display: flex;
+	justify-content: space-between;
+	padding: 0 2rem;
+	transform: translateY(-50%);
+	z-index: 1000;
+}
+
+.navigator-icon {
+	cursor: pointer;
+	font-size: 4rem;
+	color: #444;
+}
+
+.carousel-indicators {
+	text-align: center;
+	margin-top: 1rem;
+}
+
+.carousel-indicators .dot {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	margin: 0 6px;
+	background-color: #bbb;
+	transition: background-color 0.3s ease;
+}
+
+.carousel-indicators .dot.active {
+	background-color: #642A38;
 }
 
 @media only screen and (min-width: 768px) {
@@ -94,4 +166,8 @@ select[disabled] {
 }
 
 @media only screen and (min-width: 1440px) {
+	.carousel-fixed-item {
+		justify-content: space-around;
+
+	}
 }

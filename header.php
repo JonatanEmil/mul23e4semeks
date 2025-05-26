@@ -15,7 +15,7 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                 <div class="col-10 d-flex flex-wrap gap-5">
                     <?php foreach ($overkategorier as $overkategori) {
                         $ovkatid = $overkategori->overkateid; ?>
-                        <div class="nav-item dropdown">
+                        <div class="nav-item dropdown overkategori">
                             <a class="dropdown-toggle nav-link p-0 fs-5" type="button" data-bs-toggle="dropdown">
                                 <?php echo $overkategori->overkatenavn; ?>
                             </a>
@@ -46,7 +46,7 @@ $overkategorier = $db->sql('SELECT * FROM overkategorier');
                             </div>
                         </div>
                     <?php } ?>
-                    <div class="nav-item dropdown">
+                    <div class="nav-item dropdown overkategori">
                         <a class="dropdown-toggle nav-link p-0 fs-5" type="button" data-bs-toggle="dropdown">INFO</a>
                         <div class="dropdown-menu bg-cream">
                             <a href="omos.php" class="dropdown-item">OM OS</a>

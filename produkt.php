@@ -10,9 +10,9 @@ if (!empty($_GET['kateid']) && !empty($_GET['prodid'])) {
     $bind[":kateid"] = $_GET['kateid'];
     $bind[":prodid"] = $_GET['prodid'];
 }
-$produkter = $db->sql('SELECT * FROM produkter INNER JOIN lande ON prodland = landeid INNER JOIN `prod-kat-con` ON prodid = prkacoprodid WHERE prkacokatid = :kateid AND prodid = :prodid', $bind);
+$produkter = $db->sql('SELECT * FROM produkter LEFT JOIN lande ON prodland = landeid INNER JOIN `prod-kat-con` ON prodid = prkacoprodid WHERE prkacokatid = :kateid AND prodid = :prodid', $bind);
 $produkt = $produkter[0];
-$madikoner = $db->sql('SELECT * FROM `prod-mad-con` INNER JOIN madikoner ON prmacoikonid = ikonid WHERE prmacoprodid = :prodid', [":prodid" => $produkt->prodid]);
+$madikoner = $db->sql('SELECT * FROM `prod-mad-con` LEFT JOIN madikoner ON prmacoikonid = ikonid WHERE prmacoprodid = :prodid', [":prodid" => $produkt->prodid]);
 $allebutikker = $db->sql('SELECT * FROM butikker');
 $prodbutikker = $db->sql('SELECT * FROM `prod-but-con` INNER JOIN butikker ON prbucobutikid = butikid WHERE prbucoprodid = :prodid', [":prodid" => $produkt->prodid]);
 $prodbutikarr = [];
@@ -23,8 +23,8 @@ $bindkate = [];
 if (!empty($_GET['kateid'])) {
     $bindkate[":kateid"] = $_GET['kateid'];
 }
-$kategorier = $db->sql('SELECT * FROM kategorier WHERE kateid=:kateid', $bindkate);
-$kategori = $kategorier[0];
+$kategorierbroed = $db->sql('SELECT * FROM kategorier WHERE kateid=:kateid', $bindkate);
+$kategoribroed = $kategorierbroed[0];
 ?>
 <!DOCTYPE html>
 <html lang="da">
@@ -46,11 +46,11 @@ $kategori = $kategorier[0];
 <?php include "header.php"; ?>
 <div class="container page-content rounded-3">
     <div class="d-flex align-items-center">
-        <a href="kategori.php?kateid=<?php echo $kategori->kateid ?>" class="h3 mb-0 text-decoration-none text-dark">
-            <?php echo $kategori->katenavn ?>
+        <a href="kategori.php?kateid=<?php echo $kategoribroed->kateid ?>" class="h3 mb-0 text-decoration-none text-dark">
+            <?php echo $kategoribroed->katenavn ?>
         </a>
         <span class="h3 mx-2 mb-0">→</span>
-        <a href="produkt.php?kateid=<?php echo $kategori->kateid ?>&prodid=<?php echo $produkt->prodid ?>" class="h3 mb-0 text-decoration-none text-dark">
+        <a href="produkt.php?kateid=<?php echo $kategoribroed->kateid ?>&prodid=<?php echo $produkt->prodid ?>" class="h3 mb-0 text-decoration-none text-dark">
             <?php echo $produkt->prodnavn ?>
         </a>
     </div>
@@ -58,7 +58,9 @@ $kategori = $kategorier[0];
         <h1 class="mb-0 mt-2 fw-bolder d-lg-none"><?php echo $produkt->prodnavn; ?></h1>
         <div class="row d-flex align-items-center">
             <div class="col-2">
+                <?php if (($produkt->prodimg!="null")) { ?>
                 <img class="img-fluid d-lg-none" src="img/flag/<?php echo $produkt->landeimg; ?>" alt="<?php echo $produkt->landenavn; ?>s flag"></div>
+            <?php }?>
             <div class="col-10">
                 <p class="m-0 fs-4 fw-semibold d-lg-none"><?php echo $produkt->landenavn; ?></p></div>
         </div>
