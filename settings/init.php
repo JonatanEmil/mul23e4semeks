@@ -32,7 +32,7 @@ $DB_USER = "root";
 $DB_PASS = "";
 */
 
-define("CONFIG_LIVE", "0"); // 0: Test enviroment || 1: Live enviroment
+define("CONFIG_LIVE", "1"); // 0: Test enviroment || 1: Live enviroment
 
 if(CONFIG_LIVE == 0) {
     $DB_SERVER = "localhost";
@@ -40,10 +40,10 @@ if(CONFIG_LIVE == 0) {
     $DB_USER = "root";
     $DB_PASS = "";
 } else if(CONFIG_LIVE == 1) {
-    $DB_SERVER = "";
-    $DB_NAME = "";
-    $DB_USER = "";
-    $DB_PASS = "";
+    $DB_SERVER = "mysql6.unoeuro.com";
+    $DB_NAME = "jerytter_dk_db";
+    $DB_USER = "jerytter_dk";
+    $DB_PASS = "B4GFzek5wb2aREp6yhAn";
 }
 
 $db = new db($DB_SERVER, $DB_NAME, $DB_USER, $DB_PASS);
