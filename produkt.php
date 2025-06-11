@@ -46,25 +46,30 @@ $kategoribroed = $kategorierbroed[0];
 <?php include "header.php"; ?>
 <div class="container page-content rounded-3">
     <div class="d-flex align-items-center">
-        <a href="kategori.php?kateid=<?php echo $kategoribroed->kateid ?>" class="h3 mb-0 text-decoration-none text-dark">
+        <a href="kategori.php?kateid=<?php echo $kategoribroed->kateid ?>"
+           class="h3 mb-0 text-decoration-none text-dark">
             <?php echo $kategoribroed->katenavn ?>
         </a>
         <span class="h3 mx-2 mb-0">→</span>
-        <a href="produkt.php?kateid=<?php echo $kategoribroed->kateid ?>&prodid=<?php echo $produkt->prodid ?>" class="h3 mb-0 text-decoration-none text-dark">
+        <a href="produkt.php?kateid=<?php echo $kategoribroed->kateid ?>&prodid=<?php echo $produkt->prodid ?>"
+           class="h3 mb-0 text-decoration-none text-dark">
             <?php echo $produkt->prodnavn ?>
         </a>
     </div>
     <div class="row g-3 page-content text-port align-items-xl-center mt-0 pt-0">
         <h1 class="mb-0 mt-2 fw-bolder d-lg-none"><?php echo $produkt->prodnavn; ?></h1>
-        <div class="row d-flex align-items-center">
-            <div class="col-2">
-                <?php if (($produkt->prodimg!="null")) { ?>
-                <img class="img-fluid d-lg-none" src="img/flag/<?php echo $produkt->landeimg; ?>" alt="<?php echo $produkt->landenavn; ?>s flag"></div>
-            <?php }?>
-            <div class="col-10">
-                <p class="m-0 fs-4 fw-semibold d-lg-none"><?php echo $produkt->landenavn; ?></p></div>
-        </div>
-        <p class="display-2 fw-bold d-lg-none mb-0">Kr. <?php echo number_format($produkt->prodpris, 2, ",", ""); ?> pr. stk.</p>
+
+        <?php if (!is_null($produkt->prodland)) { ?>
+            <div class="row d-flex align-items-center">
+                <div class="col-2"><img class="img-fluid d-lg-none" src="img/flag/<?php echo $produkt->landeimg; ?>"
+                                        alt="<?php echo $produkt->landenavn; ?>s flag"></div>
+                <div class="col-10"><p class="m-0 fs-4 fw-semibold d-lg-none"><?php echo $produkt->landenavn; ?></p>
+                </div>
+            </div>
+        <?php } ?>
+
+        <p class="display-2 fw-bold d-lg-none mb-0">Kr. <?php echo number_format($produkt->prodpris, 2, ",", ""); ?> pr.
+            stk.</p>
         <?php if ($produkt->prodkasse === 1) { ?>
             <p class="h5 fw-bold text-wine d-lg-none m-0">Kassepris (6 flasker):
                 Kr. <?php echo number_format($produkt->prodkassepris, 2, ",", ""); ?> pr. kasse.</p>
@@ -91,12 +96,16 @@ $kategoribroed = $kategorierbroed[0];
         </div>
         <div class="col-12 col-lg-7">
             <h1 class="mb-0 mt-2 d-none d-lg-block card-title"><?php echo $produkt->prodnavn; ?></h1>
-            <div class="row d-flex align-items-center">
-                <div class="col-2">
-                <img class="img-fluid d-lg-block d-none" src="img/flag/<?php echo $produkt->landeimg; ?>" alt="<?php echo $produkt->landenavn; ?>s flag"></div>
-                <div class="col-10">
-                <p class="m-0 fs-4 fw-semibold d-lg-block d-none"><?php echo $produkt->landenavn; ?></p></div>
-            </div>
+            <?php if (!is_null($produkt->prodland)) { ?>
+                <div class="row d-flex align-items-center">
+                    <div class="col-2"><img class="img-fluid d-lg-block d-none"
+                                            src="img/flag/<?php echo $produkt->landeimg; ?>"
+                                            alt="<?php echo $produkt->landenavn; ?>s flag"></div>
+                    <div class="col-10"><p
+                                class="m-0 fs-4 fw-semibold d-lg-block d-none"><?php echo $produkt->landenavn; ?></p>
+                    </div>
+                </div>
+            <?php } ?>
             <div class="row d-flex justify-content-start align-items-center flex-wrap">
                 <?php foreach ($madikoner as $ikon) { ?>
                     <div class="col-auto mt-2 mb-2">
@@ -108,7 +117,8 @@ $kategoribroed = $kategorierbroed[0];
                     </div>
                 <?php } ?>
             </div>
-            <p class="display-2 fw-bold d-none d-lg-block">Kr. <?php echo number_format($produkt->prodpris, 2, ",", ""); ?> pr. stk.</p>
+            <p class="display-2 fw-bold d-none d-lg-block">
+                Kr. <?php echo number_format($produkt->prodpris, 2, ",", ""); ?> pr. stk.</p>
             <?php if ($produkt->prodkasse === 1) { ?>
                 <p class="h5 fw-bold text-wine d-none d-lg-block">Kassepris (6 flasker):
                     Kr. <?php echo number_format($produkt->prodkassepris, 2, ",", ""); ?> pr. kasse.</p>
